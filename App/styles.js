@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Navigator, StyleSheet } from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#191919', // lead black
     // padding: 30,
     // padding: 20,
+    paddingTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
     flex: 1,
   },
   main: {

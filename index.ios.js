@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { AppRegistry, Navigator, Text, View } from 'react-native';
+import { AppRegistry, Navigator, Text, TouchableHighlight, View } from 'react-native';
 
 import BankReportScene from './App/BankReportScene';
 import BankCheckScene from './App/BankCheckScene';
@@ -21,9 +21,47 @@ function defundDaplApp() {
   //   <BankSearch />
   // );
 
+// RightButton: () => <Text>Done</Text>,
+// backgroundColor: '#191919'  #B5B5B5
+// backgroundColor: '#191919'  #B5B5B5
+//          style={{ backgroundColor: '#B5B5B5' }}
+//        <Navigator.NavigationBar
+// LeftButton: () =>
+// <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 15, paddingTop: 10 }}>&lt;</Text>,
+
   return (
     <Navigator
       initialRoute={{ title: 'Check your bank', screen: screens.LOOKUP }}
+
+      navigationBar={
+        <Navigator.NavigationBar
+          routeMapper={{
+            LeftButton: (route, navigator, index) => {
+              // console.warn("route:  ");
+              // console.warn(route);
+              // console.warn(`index: ${index}`);
+              if (index === 0) { // route.index
+                return null;
+              }
+              return (
+                <TouchableHighlight onPress={() => navigator.pop()}>
+                  <Text
+                    style={{ color: "blue", fontWeight: "bold", paddingTop: 15, marginLeft: 10 }}
+                  >&lt; Back
+                  </Text>
+                </TouchableHighlight>
+              );
+            },
+            Title: () => <Text style={{ fontSize: 20, fontWeight: 'bold', paddingTop: 10 }}>#DefundDAPL</Text>,
+            RightButton: () => {},
+          }}
+          style={{ backgroundColor: '#D5D3D5', paddingLeft: 30 }}
+        />
+      }
+
+      configureScene={() => Navigator.SceneConfigs.VerticalUpSwipeJump} // HorizontalSwipeJumpFromRight
+
+
       renderScene={(route, navigator) => {
         let nextScene;
         switch (route.screen) {

@@ -34,15 +34,18 @@ function BankReportScene(props) {
   return (
     <View style={styles.container}>
       { bankView }
-      <Button
+
+    </View>
+  );
+  /*
+<Button
         style={{ marginTop: 10 }}
         color="white"
         onPress={() => props.navigator.pop()}
         title="Restart"
         accessibilityLabel="Return to app start"
       />
-    </View>
-  );
+*/
 }
 
 

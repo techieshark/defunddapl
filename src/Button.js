@@ -6,6 +6,7 @@ import stylePropType from 'react-style-proptype';
 const styles = StyleSheet.create({
   button_container: {
     backgroundColor: 'blue',
+    marginTop: 10,
     // backgroundColor: '#333'
     // backgroundColor: '#191919',
     // borderColor: '#cdcdcd',

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Navigator, View } from 'react-native'; // TouchableHighlight,
 
-import Button from './Button';
 import GuiltyBank from './GuiltyBank';
 import InnocentBank from './InnocentBank';
 import styles from './styles';
@@ -34,18 +33,8 @@ function BankReportScene(props) {
   return (
     <View style={styles.container}>
       { bankView }
-
     </View>
   );
-  /*
-<Button
-        style={{ marginTop: 10 }}
-        color="white"
-        onPress={() => props.navigator.pop()}
-        title="Restart"
-        accessibilityLabel="Return to app start"
-      />
-*/
 }
 
 

@@ -18,9 +18,9 @@ import Button from './Button';
 import banks from './banks';
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
-  },
+  // container: {
+  //   marginTop: 20,
+  // },
   searchRow: {
   },
   textinput: {
@@ -58,9 +58,10 @@ class BankSearch extends Component {
     };
   }
 
+// view style={styles.container}
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <View style={styles.searchRow}>
           <TextInput
             style={styles.textinput}

@@ -1,18 +1,15 @@
 import React, { PropTypes } from 'react';
-import { Navigator, Text, View } from 'react-native';
+import { Navigator, ScrollView, Text, View } from 'react-native';
 
 import screens from './screens';
 import styles from './styles';
 import Button from './Button';
 
-// const onPressDefund = () => {
-//   Alert.alert('Congrats, your money is divested from this bank!');
-// };
 
 function GuiltyBank(props) {
   return (
     <View style={styles.main}>
-      <View>
+      <ScrollView>
         <Text
           style={[styles.text, styles.text_size_l]}
         >
@@ -24,11 +21,11 @@ function GuiltyBank(props) {
           with <Text style={styles.text_impact}>{ props.amount } </Text>
           belonging to you and other customers.
         </Text>
-      </View>
+      </ScrollView>
       <Button
         color="white"
         onPress={() => props.navigator.push({
-          title: 'Defund DAPL: Step 1',
+          title: 'Step 1', // Defund DAPL: Step 1
           screen: screens.STEP1,
           bankName: props.bankName,
         })}

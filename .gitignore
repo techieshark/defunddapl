@@ -51,3 +51,9 @@ android/app/libs
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+#sublime
+*.sublime-workspace
+
+#misc
+react-native-share/*

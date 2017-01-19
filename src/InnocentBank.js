@@ -1,25 +1,20 @@
 import React, { PropTypes } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import Share from 'react-native-share';
 
 import Button from './Button';
 import styles from './styles';
 
-
-const onPressDefund = () => {
-  Alert.alert('THx for tweeting that!');
-  Share.shareSingle({ // open
-    message: 'I just checked and my bank *is not* funding the ' +
-      'Dakota Access Pipeline. Is yours? #DeFundDAPL #DeFundDaplApp',
-    // url: 'http://defunddapl.org',
-    social: 'twitter',
-  }, msg => console.error(`Fail: ${msg}`), msg => Alert.alert(`Success: ${msg}`))
-    .then(() => Alert.alert('Yay tweets!'))
-    .catch(err => (err && console.error(err))); // err.error
-};
-
 function InnocentBank(props) {
+  const shareOptions = {
+    title: "React Native",
+    message: 'Nice! #DeFundDaplApp says my bank *is not* funding the ' +
+      'Dakota Access Pipeline. Is yours? #NoDAPL',
+    url: "http://www.defunddapl.org",
+    social: 'twitter',
+  };
+
   return (
     <View style={styles.main}>
       <View>
@@ -52,7 +47,15 @@ function InnocentBank(props) {
 
       <Button
         color="white"
-        onPress={onPressDefund}
+        onPress={() => {
+          Share.shareSingle(shareOptions).catch((err) => {
+            if (err === 'User did not share') {
+              console.warn(err);
+            } else {
+              console.error(err);
+            }
+          });
+        }}
         title="Share"
         accessibilityLabel="Share your news"
       />

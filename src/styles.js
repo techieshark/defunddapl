@@ -1,4 +1,4 @@
-import { Navigator, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     color: 'white',
-    // marginTop: 20,
-    marginVertical: 20,
+    marginTop: 10,
+    // marginBottom: 10,
     textAlign: 'center',
   },
   text_impact: {
@@ -35,16 +35,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
     fontWeight: '300',
   },
-  container: {
+  app: {
     backgroundColor: '#191919', // lead black
-    // padding: 30,
-    // padding: 20,
-    paddingTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
+  },
+  container: {
+    // marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
+    marginTop: 64, // above isn't working: evaluates to 44, not 64
     flex: 1,
   },
   main: {
     flex: 1,
     justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  spaceAround: {
+    flex: 1,
+    justifyContent: 'space-around',
   },
 });
 

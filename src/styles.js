@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
   text_size_l: {
     fontSize: 36,
   },
+  textinput: {
+    height: 40,
+    paddingLeft: 5,
+    backgroundColor: 'white',
+  },
   tweet_container: {
     borderRadius: 5,
     borderWidth: 1,

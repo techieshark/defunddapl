@@ -26,13 +26,11 @@ function App() {
   return (
     <Navigator
       style={styles.app}
-      initialRoute={{ title: '', screen: screens.LOOKUP }} // title: 'Check your bank'
-
+      initialRoute={{ title: '#DefundDAPL', screen: screens.LOOKUP }} // title: 'Check your bank'
       navigationBar={
         <Navigator.NavigationBar
-          routeMapper={{
-            LeftButton: (route, navigator, index) => {
-              // console.warn('route', route);
+          routeMapper={{ // route, navigator, index, navState
+            LeftButton: (route, navigator, index, navState) => {
               if (index === 0) { // route.index
                 return null;
               }
@@ -42,22 +40,22 @@ function App() {
                   underlayColor="#ffffff00" // transparent
                 >
                   <View
-                    style={{ padding: 8 }}
+                    style={{ /* backgroundColor: "orange", */ flexDirection: 'row', alignItems: 'center', width: 120, height: 44, marginLeft: 10 }}
                   >
-                    <Icon name="ios-arrow-back" size={28} color="blue" />
+                    <Icon
+                      style={{/* backgroundColor: "yellow" */}} name="ios-arrow-back" size={26}
+                    />
+                    <Text
+                      style={{/* backgroundColor: "yellow" */ color: "black", fontWeight: "bold", paddingLeft: 1, paddingTop: -1 }}
+                    >
+                      {navState.routeStack[index - 1].title}
+                    </Text>
                   </View>
                 </TouchableHighlight>
               );
             },
-            Title: () => <Text style={{ fontSize: 20, fontWeight: 'bold', paddingTop: 10 }}>#DefundDAPL</Text>,
-            RightButton: route =>
-              (
-                <Text
-                  style={{ fontWeight: "bold", paddingTop: 15, marginRight: 10 }}
-                >
-                  { route.title }
-                </Text>
-              ),
+            Title: route => <Text style={{ fontWeight: "bold", paddingTop: 10 }}>{ route.title }</Text>,
+            RightButton: () => <Text />,
           }}
           style={{ backgroundColor: '#D5D3D5', paddingLeft: 30 }}
         />

@@ -7,6 +7,8 @@
 import React from 'react';
 import { Navigator, Text, TouchableHighlight, View } from 'react-native';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import BankReportScene from './BankReportScene';
 import BankCheckScene from './BankCheckScene';
 import Step1Scene from './Step1Scene';
@@ -35,11 +37,15 @@ function App() {
                 return null;
               }
               return (
-                <TouchableHighlight onPress={() => navigator.pop()}>
-                  <Text
-                    style={{ color: "blue", fontWeight: "bold", paddingTop: 15, marginLeft: 10 }}
-                  >&lt; Back
-                  </Text>
+                <TouchableHighlight
+                  onPress={() => navigator.pop()}
+                  underlayColor="#ffffff00" // transparent
+                >
+                  <View
+                    style={{ padding: 8 }}
+                  >
+                    <Icon name="ios-arrow-back" size={28} color="blue" />
+                  </View>
                 </TouchableHighlight>
               );
             },

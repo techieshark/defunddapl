@@ -42,7 +42,7 @@ function Step4Scene(props) {
         }}
       />
       <Button
-        title="Done"
+        title="Next"
         accessibilityLabel="I have posted on Instagram"
         onPress={() => {
           props.navigator.push({

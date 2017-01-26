@@ -42,7 +42,7 @@ function Step2Scene(props) {
           }}
         />
         <Button
-          title="Done"
+          title="Next"
           accessibilityLabel="I have moved my money to a better bank"
           onPress={() => {
             props.navigator.push({

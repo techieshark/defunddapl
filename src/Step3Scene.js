@@ -42,7 +42,7 @@ function Step3Scene(props) {
           }}
         />
         <Button
-          title="Done"
+          title="Next"
           accessibilityLabel="I have tracked my withdrawal"
           onPress={() => {
             props.navigator.push({

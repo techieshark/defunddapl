@@ -4,30 +4,21 @@ import { Navigator, View } from 'react-native'; // TouchableHighlight,
 import GuiltyBank from './GuiltyBank';
 import InnocentBank from './InnocentBank';
 import styles from './styles';
-import banks from './banks';
-
-function getFundingStatus(bankName) {
-  const status = banks.find(bank => bank.name === bankName);
-  return status || { funding: false, bank: bankName, amount: '$0' };
-}
-
+import { findBank } from './banks'; // banks
 
 // export default class BankReportScene extends Component {
 function BankReportScene(props) {
-  const bankStatus = getFundingStatus(props.bankName);
-  const isFunding = bankStatus.funding;
-
+  const maybeBank = findBank(props.bankName); // bank, or undefined if not found
   // keep here: screenHeight will update when orientation changes
   // const screenHeight = Dimensions.get('window').height;
 
-  const bankView = isFunding ? (
+  const bankView = maybeBank ? (
     <GuiltyBank
-      bankName={bankStatus.name}
-      amount={bankStatus.amount}
+      bank={maybeBank}
       navigator={props.navigator}
     />
   ) : (
-    <InnocentBank bankName={bankStatus.bank} />
+    <InnocentBank bankName={props.bankName} />
   );
 
   return (

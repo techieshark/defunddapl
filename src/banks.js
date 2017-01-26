@@ -1,10 +1,26 @@
+// @flow
+
 /* exports a dataset */
 /* sources:
    https://www.foodandwaterwatch.org/news/who%27s-banking-dakota-access-pipeline
    http://www.commondreams.org/views/2016/10/28/how-contact-17-banks-funding-dakota-access-pipeline
 */
 
-const banks = [
+type Phone = {
+  name: string,
+  number: string,
+};
+
+export type Bank = {
+  name: string,
+  amount: string,
+  emailAddressee: string,
+  emailTo: ?string[],
+  emailCC: ?string[],
+  phoneContacts?: Phone[],
+};
+
+const banks: Array<Bank> = [
   {
     name: 'Bank of Nova Scotia (Scotiabank)',
     funding: true,
@@ -91,9 +107,23 @@ const banks = [
     name: 'Credit Suisse',
     funding: true,
     amount: '$340,558,456',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: "CEO Tidjane Thiam & Board Chairman Urs Rohner", // TODO
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: "Suisse Banking Ombudsman",
+        number: "41-43-266-14-14",
+      },
+      {
+        name: "Swiss Corporate Office",
+        number: "41-44-333-11-11",
+      },
+      {
+        name: "U.S. Office",
+        number: "415-249-2100",
+      },
+    ],
   },
   {
     name: 'Royal Bank of Canada',
@@ -150,7 +180,7 @@ const banks = [
     name: 'Wells Fargo',
     funding: true,
     amount: '$467,000,000',
-    emailDear: 'CEO Sloan',
+    emailAddressee: 'CEO Sloan',
     emailTo: ['CEO Timothy J. Sloan <timothy.j.sloan@wellsfargo.com>'],
     emailCC: ['BoardCommunications@wellsfargo.com'],
   },
@@ -166,9 +196,19 @@ const banks = [
     name: 'DNB Capital/ASA',
     funding: true,
     amount: '$460,558,456',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: "CEO Rune Bjerke", // TODO
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: "Chairwoman of the Board Anne Carine Tanum",
+        number: "47-915-04800",
+      },
+      {
+        name: "Executive Vice President Communications Even Westerveld",
+        number: "47-400-16-744",
+      },
+    ],
   },
   {
     name: 'SunTrust',
@@ -190,25 +230,48 @@ const banks = [
     name: 'BBVA Compass',
     funding: true,
     amount: '$460,558,456',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'Chairman and CEO Manolo Sanchez, Ms. Anderson, and Mr. Ortiz',
+    emailTo: [
+      'Christina Anderson, Director of External Communications <christina.anderson@bbva.com>',
+      'Al Ortiz, Communications <al.ortiz@bbva.com>',
+    ],
     emailCC: null,
   },
   {
     name: 'Sumitomo Mitsui Bank',
     funding: true,
     amount: '$358,558,456',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'President and CEO Takeshi Kunibe',
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'Tokyo, Japan Office',
+        number: '81-3-3282-8111',
+      },
+      {
+        name: 'New York, US Office',
+        number: '212-224-4000',
+      },
+    ],
   },
   {
     name: 'Bank of Tokyo Mitsubishi UFJ',
     funding: true,
     amount: '$548,058,456',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'Chairman Nobuyuki Hirano & CEO and President Takashi Oyamada',
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'Tokyo, Japan Office',
+        number: '81-3-3240-8111',
+      },
+      {
+        name: 'New York, U.S. Office',
+        number: '212-782-4000',
+      },
+    ],
   },
   {
     name: 'Citibank',
@@ -222,17 +285,37 @@ const banks = [
     name: 'Mizuho Bank',
     funding: true,
     amount: '$589,558,456',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'President and CEO Nobuhide Hayashi',
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'Tokyo, Japan Office',
+        number: '81-3-3214-1111',
+      },
+      {
+        name: 'New York, U.S. Office',
+        number: '212-282-3000',
+      },
+    ],
   },
   {
     name: 'TD Securities',
     funding: true,
     amount: '$365,000,000',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'Chairman, CEO, and President Bob Dorrance',
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'Toronto, Canada Corporate Office, Investment Banking',
+        number: '416-307-8500',
+      },
+      {
+        name: 'New York, U.S. Office',
+        number: '212-827-7000',
+      },
+    ],
   },
   {
     name: 'Credit Agricole',
@@ -246,9 +329,19 @@ const banks = [
     name: 'ABN Amro Capital',
     funding: true,
     amount: '$45,000,000',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'Chairman of the Board Gerrit Zalm',
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'Amsterdam Corporate Office',
+        number: '31-10-241-17-2',
+      },
+      {
+        name: 'New York, U.S. Office',
+        number: '917-284-6800',
+      },
+    ],
   },
   {
     name: 'Intesa Sanpaolo',
@@ -277,9 +370,19 @@ const banks = [
     name: 'Natixis',
     funding: true,
     amount: '$180,000,000',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: 'CEO Pierre Servant',
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'France Corporate Office',
+        number: '33-1-78-40-90-00',
+      },
+      {
+        name: 'Boston, U.S. Office',
+        number: '617-449-2100',
+      },
+    ],
   },
   {
     name: 'BayernLB',
@@ -294,9 +397,19 @@ const banks = [
     name: 'ICBC London',
     funding: true,
     amount: '$120,000,000',
-    emailAddressee: null,
-    emailTo: [],
+    emailAddressee: "CEO and Managing Director Jin Chen",
+    emailTo: null,
     emailCC: null,
+    phoneContacts: [
+      {
+        name: 'London Office',
+        number: '44-203-145-5000',
+      },
+      {
+        name: 'U.S. Office',
+        number: '212-407-5000',
+      },
+    ],
   },
   {
     name: 'Societe Generale',
@@ -307,5 +420,13 @@ const banks = [
     emailCC: ['Corporate Office <2.0@societegenerale>'],
   },
 ];
+
+/* returns a bank if we have a name match,
+   otherwise undefined.
+*/
+export function findBank(name: string): ?Bank {
+  const maybeBank = banks.find(bank => bank.name === name);
+  return maybeBank;
+}
 
 export default banks;

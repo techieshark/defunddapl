@@ -16,6 +16,7 @@ import {
 import Button from './Button';
 
 import banks from './banks';
+import colors from './colors';
 
 const styles = StyleSheet.create({
   // container: {
@@ -26,16 +27,16 @@ const styles = StyleSheet.create({
   textinput: {
     height: 40,
     paddingLeft: 5,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   result: {
-    backgroundColor: 'blue',
+    backgroundColor: colors.primary,
     marginBottom: 5,
   },
   result_text: {
     paddingVertical: 10,
     paddingLeft: 5,
-    color: 'white',
+    color: colors.white,
   },
   button: {
     marginVertical: 5,
@@ -94,7 +95,7 @@ class BankSearch extends Component {
             renderRow={bank => (
               <View style={styles.result}>
                 <TouchableHighlight
-                  underlayColor="#f1c40f"
+                  underlayColor={colors.highlight}
                   onPress={() => this.props.onClickResult(bank.name)}
                 >
                   <View>

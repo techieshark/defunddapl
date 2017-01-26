@@ -1,23 +1,62 @@
-import React, { Component, PropTypes } from 'react';
+// @flow
+
+import React, { Component } from 'react'; // , PropTypes
 import { Alert, Modal, Navigator, Text, TextInput, View } from 'react-native';
 
 // import Share from 'react-native-share';
 import Communications from 'react-native-communications';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Button from './Button';
 import Container from './Container';
 import styles from './styles';
-import banks from './banks';
+// import { findBank } from './banks';
+
+// import type is a flow extension, FYI.
+// and it requires airbnb-config-eslint v14 and later
+// as that uses "import/no-duplicates" instead of "no-duplicate-imports"
+// see also: https://github.com/airbnb/javascript/issues/1054
+import type { Bank } from './banks';
+
+// import banks, { findBank } from './banks';
+import colors from './colors';
 import screens from './screens';
+
+type Props = {
+  bank: Bank,
+  // bankName: string,
+  navigator: typeof Navigator,
+};
 
 
 class Step1Scene extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { modalVisible: false, name: undefined, textSoFar: undefined };
+  props: Props;
 
-    this.bank = banks.find(b => b.name === props.bankName);
+  state: {
+    modalVisible: boolean,
+    name: ?string,
+    textSoFar: ?string,
+  };
+
+  // bank: Bank;
+
+  // static findBank(name: string): Bank {
+  //   return banks.find(b => b.name === name);
+  // }
+
+  constructor(props: Props) { // TODO - how to get props from a class method?
+    super(props);
+    this.state = {
+      modalVisible: false,
+      name: undefined,
+      textSoFar: undefined,
+    };
+
+    // this.bank = findBank(props.bankName);
+
+    // this.bank = this.findBank(props.bankName);
+    // this.bank = banks.find(b => b.name === props.bankName);
 
       // example bank:
       //   {
@@ -33,11 +72,10 @@ class Step1Scene extends Component {
   }
 
   getMsgBody() {
-    const bank = this.bank;
+    const bank = this.props.bank;
 
-    const address = bank.emailInsideAddress ? `${bank.emailInsideAddress}\n` : '';
     const anonymousUser = 'Your former customer';
-    const msgBody = `${address} Dear ${bank.emailAddressee}:
+    const msgBody = `Dear ${bank.emailAddressee}:
 
       I am alarmed to learn that ${bank.name} has provided ${bank.amount} ` +
       `in funding to the Dakota Access Pipeline.
@@ -55,22 +93,57 @@ class Step1Scene extends Component {
     return msgBody;
   }
 
-  setModalVisible(visible) {
+  setModalVisible(visible: boolean) {
     this.setState({ modalVisible: visible });
   }
 
   openEmail() {
     setTimeout(() => {
       Communications.email(
-        this.bank.emailTo,
-        this.bank.emailCC,
+        this.props.bank.emailTo,
+        this.props.bank.emailCC,
         null /* bcc */,
         'Divesting from the Dakota Pipeline', /* subject */
         this.getMsgBody());
     }, 300);
   }
 
+  renderCallInfo() {
+    const contacts = this.props.bank.phoneContacts;
+
+    let contactInfo;
+    if (!contacts || !contacts.length) {
+      contactInfo = `Sorry, we don't have a phone number yet.`;
+    } else {
+      contactInfo = contacts[0].number;
+    }
+
+    return (
+      <Text style={styles.text}>Call them at: { contactInfo } </Text>
+    );
+  }
+
+  renderEmailButton() {
+    return (
+      <Button
+        title="Email this bank"
+        accessibilityLabel="Email this bank"
+        icon={<Icon style={{ color: "white" }} name="ios-mail-outline" size={26} />}
+        onPress={() => {
+          if (!this.state.name) {
+            this.setModalVisible(true);
+          } else {
+            // console.warn(`Sending email using name: ${this.state.name}`);
+            this.openEmail();
+          }
+        }}
+      />
+    );
+  }
+
   render() {
+    const showCallInfo : boolean = !this.props.bank.emailTo;
+
     return (
       <Container>
 
@@ -81,7 +154,7 @@ class Step1Scene extends Component {
           onRequestClose={() => { Alert.alert("Modal has been closed."); }}
         >
           <View
-            style={{ flex: 1, backgroundColor: "#C3C9D7" }} // slategrey
+            style={{ flex: 1, backgroundColor: colors.modalBackground }} // slategrey
           >
             <View style={styles.spaceAround}>
               <View style={{ padding: 15 }}>
@@ -110,7 +183,7 @@ class Step1Scene extends Component {
             <Button
               accessibilityLabel="Cancel"
               title="Cancel"
-              style={{ backgroundColor: "black" }}
+              backgroundColor={colors.modalBackground}
               onPress={() => this.setModalVisible(!this.state.modalVisible)}
             />
           </View>
@@ -119,26 +192,16 @@ class Step1Scene extends Component {
 
 
         <View style={styles.spaceAround}>
-          <Text style={styles.text}>Let {this.props.bankName} know your funds
+          <Text style={styles.text}>Let {this.props.bank.name} know your funds
           shouldn’t be used to fund
           the Dakota oil pipeline.
           </Text>
+          { showCallInfo ? this.renderCallInfo() : null }
         </View>
         <View>
+          { this.props.bank.emailTo ? this.renderEmailButton() : null }
           <Button
-            title="Email this bank"
-            accessibilityLabel="Email this bank"
-            onPress={() => {
-              if (!this.state.name) {
-                this.setModalVisible(true);
-              } else {
-                // console.warn(`Sending email using name: ${this.state.name}`);
-                this.openEmail();
-              }
-            }}
-          />
-          <Button
-            title="Done!"
+            title="Next"
             accessibilityLabel="I have emailed my bank."
             onPress={() => {
               this.props.navigator.push({
@@ -166,7 +229,7 @@ class Step1Scene extends Component {
 
 export default Step1Scene;
 
-Step1Scene.propTypes = {
-  bankName: PropTypes.string.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-};
+// Step1Scene.propTypes = {
+//   bankName: PropTypes.string.isRequired,
+//   navigator: PropTypes.instanceOf(Navigator).isRequired,
+// };

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Navigator, Text, TouchableHighlight, View } from 'react-native';
+import { Navigator, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -18,9 +18,33 @@ import Step4Scene from './Step4Scene';
 import Step5Scene from './Step5Scene';
 import ThanksScene from './ThanksScene';
 
+import colors from './colors';
 import screens from './screens';
 import styles from './styles';
 
+const appStyles = StyleSheet.create({
+  navBar: {
+    backgroundColor: colors.navBar,
+    paddingLeft: 30,
+  },
+  backBtnContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 120,
+    height: 44,
+    marginLeft: 10,
+  },
+  backBtnText: {
+    color: colors.black,
+    fontWeight: "bold",
+    paddingLeft: 1,
+    paddingTop: -1,
+  },
+  navTitleText: {
+    fontWeight: "bold",
+    paddingTop: 10,
+  },
+});
 
 function App() {
   return (
@@ -28,6 +52,9 @@ function App() {
       style={styles.app}
       initialRoute={{ title: '#DefundDAPL', screen: screens.LOOKUP }} // title: 'Check your bank'
       navigationBar={
+        /* not sure why eslint barfs without the following turned off;
+           maybe too complex for it to detect component? or the null? */
+        /* eslint-disable react/display-name */
         <Navigator.NavigationBar
           routeMapper={{ // route, navigator, index, navState
             LeftButton: (route, navigator, index, navState) => {
@@ -37,28 +64,23 @@ function App() {
               return (
                 <TouchableHighlight
                   onPress={() => navigator.pop()}
-                  underlayColor="#ffffff00" // transparent
+                  underlayColor={colors.transparent}
                 >
-                  <View
-                    style={{ /* backgroundColor: "orange", */ flexDirection: 'row', alignItems: 'center', width: 120, height: 44, marginLeft: 10 }}
-                  >
-                    <Icon
-                      style={{/* backgroundColor: "yellow" */}} name="ios-arrow-back" size={26}
-                    />
-                    <Text
-                      style={{/* backgroundColor: "yellow" */ color: "black", fontWeight: "bold", paddingLeft: 1, paddingTop: -1 }}
-                    >
+                  <View style={appStyles.backBtnContainer} >
+                    <Icon name="ios-arrow-back" size={26} />
+                    <Text style={appStyles.backBtnText} >
                       {navState.routeStack[index - 1].title}
                     </Text>
                   </View>
                 </TouchableHighlight>
               );
             },
-            Title: route => <Text style={{ fontWeight: "bold", paddingTop: 10 }}>{ route.title }</Text>,
+            Title: route => <Text style={appStyles.navTitleText}>{ route.title }</Text>,
             RightButton: () => <Text />,
           }}
-          style={{ backgroundColor: '#D5D3D5', paddingLeft: 30 }}
+          style={appStyles.navBar}
         />
+        /* eslint-enable react/display-name */
       }
 
       configureScene={() => Navigator.SceneConfigs.HorizontalSwipeJump}
@@ -85,7 +107,8 @@ function App() {
           case screens.STEP1:
             nextScene = (
               <Step1Scene
-                bankName={route.bankName}
+                // bankName={route.bankName}
+                bank={route.bank}
                 navigator={navigator}
               />
             );

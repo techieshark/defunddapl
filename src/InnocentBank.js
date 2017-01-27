@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { Text, View } from 'react-native';
 
 import Share from 'react-native-share';
@@ -6,7 +7,11 @@ import Share from 'react-native-share';
 import Button from './Button';
 import styles from './styles';
 
-function InnocentBank(props) {
+type Props = {
+  bankName: string,
+};
+
+function InnocentBank(props: Props) {
   const shareOptions = {
     title: "React Native",
     message: 'Nice! #DeFundDaplApp says my bank *is not* funding the ' +
@@ -62,10 +67,6 @@ function InnocentBank(props) {
     </View>
   );
 }
-
-InnocentBank.propTypes = {
-  bankName: PropTypes.string.isRequired,
-};
 
 // <Text style={[styles.text, { textAlign: 'left' }]}>
 // Banks that are:

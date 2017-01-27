@@ -216,17 +216,6 @@ class Step1Scene extends Component {
   }
 }
 
-
-// <Button iconSrc={{ uri: EMAIL_ICON }}
-//                   onPress={()=>{
-//               this.onCancel();
-//               setTimeout(() => {
-//                 Share.shareSingle(Object.assign(shareOptions, {
-//                   "social": "email"
-//                 }));
-//               },300);
-//             }}>Email</Button>
-
 export default Step1Scene;
 
 // Step1Scene.propTypes = {

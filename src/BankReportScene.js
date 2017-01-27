@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Navigator, View } from 'react-native'; // TouchableHighlight,
 
@@ -6,8 +7,13 @@ import InnocentBank from './InnocentBank';
 import styles from './styles';
 import { findBank } from './banks'; // banks
 
+type Props = {
+  bankName: string,
+  navigator: typeof Navigator,
+};
+
 // export default class BankReportScene extends Component {
-function BankReportScene(props) {
+function BankReportScene(props: Props) {
   const maybeBank = findBank(props.bankName); // bank, or undefined if not found
   // keep here: screenHeight will update when orientation changes
   // const screenHeight = Dimensions.get('window').height;

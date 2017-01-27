@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'; // , { PropTypes }
 import { Navigator, ScrollView, Text, View } from 'react-native';
 
@@ -8,7 +9,6 @@ import type { Bank } from './banks';
 
 type Props = {
   bank: Bank,
-  amount: string,
   navigator: typeof Navigator,
 };
 
@@ -24,7 +24,7 @@ function GuiltyBank(props: Props) {
         <Text style={[styles.text, styles.text_size_l]}>{ props.bank.name }
           <Text style={styles.text_italic}> is funding </Text>
           the Dakota Access Pipeline
-          with <Text style={styles.text_impact}>{ props.amount } </Text>
+          with <Text style={styles.text_impact}>{ props.bank.amount } </Text>
           belonging to you and other customers.
         </Text>
       </ScrollView>

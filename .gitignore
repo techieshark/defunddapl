@@ -54,6 +54,3 @@ fastlane/screenshots
 
 #sublime
 *.sublime-workspace
-
-#misc
-react-native-share/*

@@ -36,6 +36,9 @@
 		B801F9750E714EF3B22AC73C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3935FCACFB0D494BABB16916 /* SimpleLineIcons.ttf */; };
 		E3B3794CD5C74439880E3280 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 204B67EEAE70443FA23DFC8A /* Octicons.ttf */; };
 		F256E53418054C85B878ACAC /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAC9242016054EBEB76705E3 /* MaterialCommunityIcons.ttf */; };
+		D01E9A141E8C773F00927B3A /* Museo300-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D01E9A111E8C773F00927B3A /* Museo300-Regular.otf */; };
+		D01E9A151E8C773F00927B3A /* Museo500-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D01E9A121E8C773F00927B3A /* Museo500-Regular.otf */; };
+		D01E9A161E8C773F00927B3A /* Museo700-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D01E9A131E8C773F00927B3A /* Museo700-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +275,9 @@
 		AAC9242016054EBEB76705E3 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		BF3CD2FD126A470BB987ECBA /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		BFB1665877134DE6827A1EA8 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
+		D01E9A111E8C773F00927B3A /* Museo300-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Museo300-Regular.otf"; sourceTree = "<group>"; };
+		D01E9A121E8C773F00927B3A /* Museo500-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Museo500-Regular.otf"; sourceTree = "<group>"; };
+		D01E9A131E8C773F00927B3A /* Museo700-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Museo700-Regular.otf"; sourceTree = "<group>"; };
 		E3ED48C3C5F34E41BF94EF13 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		F2BEAA26ED72499698C27490 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -421,6 +427,9 @@
 				8A91DF5A8F144ED6B67C6AD1 /* EvilIcons.ttf */,
 				F2BEAA26ED72499698C27490 /* FontAwesome.ttf */,
 				8E51D33CAE40440C94DFF229 /* Foundation.ttf */,
+				D01E9A111E8C773F00927B3A /* Museo300-Regular.otf */,
+				D01E9A121E8C773F00927B3A /* Museo500-Regular.otf */,
+				D01E9A131E8C773F00927B3A /* Museo700-Regular.otf */,
 				E3ED48C3C5F34E41BF94EF13 /* Ionicons.ttf */,
 				AAC9242016054EBEB76705E3 /* MaterialCommunityIcons.ttf */,
 				5D4B92667EDE43A49165C89B /* MaterialIcons.ttf */,
@@ -851,18 +860,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01E9A141E8C773F00927B3A /* Museo300-Regular.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				74A6841D9F1D4A759D8616EB /* Entypo.ttf in Resources */,
 				07DBDCE383BE48209FBE4D35 /* EvilIcons.ttf in Resources */,
 				B741AA964F084CC5BA83D113 /* FontAwesome.ttf in Resources */,
 				9B5066C5A07445C383955989 /* Foundation.ttf in Resources */,
+				D01E9A151E8C773F00927B3A /* Museo500-Regular.otf in Resources */,
 				A79B8343D7A54CDABADB9097 /* Ionicons.ttf in Resources */,
 				F256E53418054C85B878ACAC /* MaterialCommunityIcons.ttf in Resources */,
 				5D1298BA28014D9CBA3D601D /* MaterialIcons.ttf in Resources */,
 				E3B3794CD5C74439880E3280 /* Octicons.ttf in Resources */,
 				B801F9750E714EF3B22AC73C /* SimpleLineIcons.ttf in Resources */,
 				6EEE385B8D534D84B3D6F118 /* Zocial.ttf in Resources */,
+				D01E9A161E8C773F00927B3A /* Museo700-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

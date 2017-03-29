@@ -16,6 +16,7 @@ module.exports = {
         "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
         "react/display-name": 0,
         "no-console": 0,
+        "no-unused-vars": 1, // (disable only during heavy development)
         "quotes": 0,
         "react/sort-comp": [1, {
             order: [
@@ -26,8 +27,13 @@ module.exports = {
                 'render',
             ],
         }],
-        // "react-native/no-unused-styles": 1,
+        "react-native/no-unused-styles": 1,
         // "react-native/no-inline-styles": 1,
-        // "react-native/no-color-literals": 1
+        // "react-native/no-color-literals": 1,
+    },
+    "globals": {
+        "XMLHttpRequest": false,
+        // XMLHttpRequest is provided in a react native environment. Don't complain if we use it.
+        // (False just means our code shouldn't overwrite that variable.)
     }
 };

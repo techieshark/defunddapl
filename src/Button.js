@@ -1,40 +1,49 @@
 // @flow
 
 import React, { PropTypes } from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'; // ImageSourcePropType,
+import { ColorPropType, StyleSheet, Text, TouchableHighlight, View } from 'react-native'; // ImageSourcePropType,
+
 
 import stylePropType from 'react-style-proptype';
+
+import { px } from './styles';
 import colors from './colors';
 
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 5,
-    backgroundColor: colors.primary,
+const localStyles = StyleSheet.create({
+  emphasis: {
+    paddingHorizontal: px(10), /* bigger button */
+  },
+  fullWidth: {
+    paddingHorizontal: 0, /* full screen width button */
+  },
+  fitContent: {
+    alignSelf: 'center',
+  },
+  buttonContainer: {
+    // marginVertical: px(5),
+    marginTop: px(8),
+    backgroundColor: colors.primaryBackground,
+
   },
   button: {
-    // marginBottom: 100,
+    borderColor: colors.primaryTextColor,
+    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 10,
-    // backgroundColor: '#333'
-    // backgroundColor: '#191919',
-    // borderColor: '#cdcdcd',
-    // borderWidth: 1,
-    // marginTop: 10,
-    // marginHorizontal: 30,
+    margin: 0,
+    paddingVertical: px(15),
   },
   buttonText: {
-    color: colors.white,
+    color: colors.primaryTextColor,
     textAlign: 'left',
-    fontSize: 16,
-    padding: 8,
+    fontSize: px(23),
     fontWeight: 'bold',
     textAlignVertical: 'center',
+    fontFamily: 'Futura-Bold',
+    letterSpacing: 1,
   },
   icon: {
-    // width: 28,
-    // height: 28,
     marginLeft: 10,
     marginRight: 10,
   },
@@ -44,70 +53,86 @@ const styles = StyleSheet.create({
 type Props = {
   accessibilityLabel: string,
   disabled?: boolean,
-  icon?: typeof React.PropTypes.element,
+  emphasis?: boolean,
+  fullWidth?: boolean,
+  fitContent?: boolean,
+  icon?: typeof PropTypes.element,
   onPress: () => any,
   backgroundColor?: string,
-  buttonStyle?: stylePropType, // or stylePropTypes.supportingArrays
+  backgroundColor?: ColorPropType,
+  buttonStyle?: stylePropType.supportingArrays, // or stylePropType.supportingArrays
   textStyle?: stylePropType,
   title: string,
 };
-// see also Button.propTypes below
+
+const defaultProps: Props = {
+  accessibilityLabel: '',
+  disabled: false,
+  buttonStyle: undefined,
+  backgroundColor: undefined,
+  emphasis: false,
+  fullWidth: false,
+  fitContent: false,
+  icon: undefined,
+  onPress: () => {},
+  textStyle: undefined,
+  title: '',
+};
 
 function Button(props: Props) {
   let iconElement;
   if (props.icon) {
     iconElement = (
-      <View style={styles.icon}>
+      <View style={localStyles.icon}>
         {props.icon}
       </View>
     );
   }
 
   return (
-    <TouchableHighlight
-      accessibilityLabel={props.accessibilityLabel}
-      activeOpacity={0.5}
-      disabled={props.disabled}
-      onPress={props.onPress}
-      // style={styles.button} // { backgroundColor: colors.primary, marginTop: 10 }
+    <View
       style={[
-        styles.container,
-        props.backgroundColor && { backgroundColor: props.backgroundColor },
+        props.emphasis && localStyles.emphasis,
+        props.fullWidth && localStyles.fullWidth,
+        { alignSelf: 'stretch' },
+        props.fitContent && localStyles.fitContent,
       ]}
-      underlayColor={colors.highlight}
     >
-      <View
+      <TouchableHighlight
+        accessibilityLabel={props.accessibilityLabel}
+        activeOpacity={0.5}
+        disabled={props.disabled}
+        onPress={props.onPress}
         style={[
-          styles.button,
-          props.buttonStyle && props.buttonStyle,
-          props.disabled && { backgroundColor: colors.disabled },
+          localStyles.buttonContainer,
+          props.backgroundColor && { backgroundColor: props.backgroundColor },
         ]}
+        underlayColor={colors.highlight}
       >
-        {
-          props.icon && iconElement
-        }
-        <Text
+        <View
           style={[
-            styles.buttonText,
-            props.textStyle && props.textStyle,
+            localStyles.button,
+            props.buttonStyle && props.buttonStyle,
+            props.disabled && { backgroundColor: colors.disabled },
           ]}
         >
-          {props.title}
-        </Text>
-      </View>
-    </TouchableHighlight>
+          {
+            props.icon && iconElement
+          }
+          <Text
+            style={[
+              localStyles.buttonText,
+              props.textStyle && props.textStyle,
+            ]}
+          >
+            {props.title}
+          </Text>
+        </View>
+      </TouchableHighlight>
+    </View>
   );
 }
 
-Button.propTypes = {
-  accessibilityLabel: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-  icon: React.PropTypes.element,
-  onPress: PropTypes.func,
-  backgroundColor: PropTypes.string,
-  buttonStyle: stylePropType, // or stylePropTypes.supportingArrays
-  textStyle: stylePropType,
-  title: PropTypes.string.isRequired,
-};
+Button.defaultProps = defaultProps;
 
 export default Button;

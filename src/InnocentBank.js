@@ -5,7 +5,8 @@ import { Text, View } from 'react-native';
 import Share from 'react-native-share';
 
 import Button from './Button';
-import styles from './styles';
+import constants from './constants';
+import styles, { px } from './styles';
 
 type Props = {
   bankName: string,
@@ -21,7 +22,12 @@ function InnocentBank(props: Props) {
   };
 
   return (
-    <View style={styles.main}>
+    <View
+      style={[
+        styles.main,
+        styles.spaceBelow,
+        { marginTop: px(constants.SPACING_LARGE) }]}
+    >
       <View>
         <Text
           style={styles.text}
@@ -37,7 +43,6 @@ function InnocentBank(props: Props) {
         </Text>
         <View
           style={styles.tweet_container}
-          // style={{ borderWidth: 1, borderColor: 'white', borderRadius: 5 }}
         >
           <Text style={[styles.text, styles.text_size_s, styles.text_tweet]}>
             I just checked and my bank *is not*
@@ -51,7 +56,6 @@ function InnocentBank(props: Props) {
       </View>
 
       <Button
-        color="white"
         onPress={() => {
           Share.shareSingle(shareOptions).catch((err) => {
             if (err === 'User did not share') {
@@ -68,7 +72,6 @@ function InnocentBank(props: Props) {
   );
 }
 
-// <Text style={[styles.text, { textAlign: 'left' }]}>
 // Banks that are:
 // <Text style={{ fontSize: 14 }}>
 //    Citibank (Citigroup), TD Securities,
@@ -82,7 +85,6 @@ function InnocentBank(props: Props) {
 //   Deutsche Bank, Compass Bank, Credit Suisse, DNB Capital/ASA,
 //   Royal Bank of Canada, UBS, Goldman Sachs, Morgan Stanley,
 //   Origin Bank (formerly Community Trust), and HSBC Bank.
-// </Text>
 // </Text>
 
 export default InnocentBank;

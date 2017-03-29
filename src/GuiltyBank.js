@@ -1,32 +1,49 @@
 // @flow
-import React from 'react'; // , { PropTypes }
-import { Navigator, ScrollView, Text, View } from 'react-native';
+import React from 'react';
+import { Navigator, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import constants from './constants';
 import screens from './screens';
-import styles from './styles';
+import styles, { px } from './styles';
+import Amount from './Amount';
 import Button from './Button';
 import type { Bank } from './banks';
 
+const localStyles = StyleSheet.create({
+  textStyle: {
+    fontSize: px(21), /* Also in Step1Scene - todo put elsewhere */
+    letterSpacing: 3,
+  },
+  amountText: {
+    // fontSize: 41,
+    fontSize: px(40),
+  },
+});
+
 type Props = {
   bank: Bank,
-  navigator: typeof Navigator,
+  navigator: Navigator,
 };
 
 function GuiltyBank(props: Props) {
   return (
-    <View style={styles.main}>
+    <View
+      style={[
+        styles.main,
+        styles.spaceBelow,
+        { marginTop: px(constants.SPACING_LARGE) }]}
+    >
       <ScrollView>
         <Text
-          style={[styles.text, styles.text_size_l]}
-        >
-          Yikes!
-        </Text>
-        <Text style={[styles.text, styles.text_size_l]}>{ props.bank.name }
-          <Text style={styles.text_italic}> is funding </Text>
-          the Dakota Access Pipeline
-          with <Text style={styles.text_impact}>{ props.bank.amount } </Text>
-          belonging to you and other customers.
-        </Text>
+          style={[
+            styles.text, styles.text_size_l,
+            { fontSize: px(30), textAlign: 'left' },
+          ]}
+        >{ props.bank.name } is funding the Dakota Access Pipeline with </Text>
+        <Amount amount={props.bank.amount} textStyle={localStyles.amountText} />
+        <Text
+          style={[styles.text, { fontSize: px(22), textAlign: 'left' }]}
+        >belonging to you and other customers. </Text>
       </ScrollView>
       <Button
         color="white"
@@ -35,17 +52,13 @@ function GuiltyBank(props: Props) {
           screen: screens.STEP1,
           bank: props.bank,
         })}
-        title="Defund them"
+        title="DEFUND THEM"
         accessibilityLabel="Divest from your bank"
+        textStyle={localStyles.textStyle}
+        buttonStyle={styles.button_narrow}
       />
     </View>
   );
 }
-
-// GuiltyBank.propTypes = {
-//   bankName: PropTypes.string.isRequired,
-//   amount: PropTypes.string.isRequired,
-//   navigator: PropTypes.instanceOf(Navigator).isRequired,
-// };
 
 export default GuiltyBank;

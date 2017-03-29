@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import {
   Navigator,
   Text,
@@ -6,8 +7,9 @@ import {
 } from 'react-native';
 
 import BankSearch from './BankSearch';
+import constants from './constants';
 import screens from './screens';
-import styles from './styles';
+import styles, { px } from './styles';
 
 
 /**
@@ -21,13 +23,13 @@ Check:
 [ Bank of America ]
 */
 
+type Props = {
+  navigator: Navigator,
+}
 
-function BankCheckScene(props) {
-  // keep here: screenHeight will update when orientation changes
-  // const screenHeight = Dimensions.get('window').height;
-
+function BankCheckScene(props: Props) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { marginTop: constants.SPACING_SMALL }]}>
       <BankSearch
         onClickResult={(bankName) => {
           props.navigator.push({
@@ -37,40 +39,19 @@ function BankCheckScene(props) {
           });
         }}
       />
-      <Text style={styles.text}>Is your bank funding the pipeline?</Text>
+      <Text
+        style={[
+          styles.text,
+          {
+            fontSize: px(36),
+            textAlign: 'left',
+            marginTop: px(constants.SPACING_MEDIUM), /* marginTop: px(40) */
+          },
+        ]}
+      >Is your bank funding the pipeline?
+      </Text>
     </View>
   );
 }
-
-//       <Text style={styles.text}>Check:</Text>
-
-// const onPressWells = () => {
-//   Alert.alert('Wells Fargo sucks!');
-// }
-
-// const onPressBECU = () => {
-//   Alert.alert('BECU - not bad');
-// }
-
-
-// (
-//   <Button
-//     color="white"
-//     onPress={props.onPressWells}
-//     title="Wells Fargo"
-//     accessibilityLabel="Lookup Wells Fargo"
-//   />
-//   <Button
-//     color="white"
-//     onPress={props.onPressBECU}
-//     title="BECU"
-//     accessibilityLabel="Lookup BECU"
-//   />
-// )
-
-BankCheckScene.propTypes = {
-  // onBankProvided: PropTypes.func.isRequired,
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-};
 
 export default BankCheckScene;

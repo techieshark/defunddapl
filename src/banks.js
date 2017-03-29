@@ -21,6 +21,29 @@ export type Bank = {
 };
 
 const banks: Array<Bank> = [
+  // {
+  //   name: 'Test Phone Bank',
+  //   funding: true,
+  //   amount: '$100,000,000',
+  //   emailAddressee: 'CEO and President Brian J. Porter',
+  //   emailTo: null,
+  //   emailCC: null,
+  //   phoneContacts: [
+  //     {
+  //       name: "Some Silly CEO",
+  //       number: '+41-43-266-14-14',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Test Phoneless Bank',
+  //   funding: true,
+  //   amount: '$100,000,000',
+  //   emailAddressee: 'CEO and President Brian J. Porter',
+  //   emailTo: null,
+  //   emailCC: null,
+  //   phoneContacts: [],
+  // },
   {
     name: 'Bank of Nova Scotia (Scotiabank)',
     funding: true,
@@ -113,15 +136,15 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: "Suisse Banking Ombudsman",
-        number: "41-43-266-14-14",
+        number: '+41-43-266-14-14',
       },
       {
         name: "Swiss Corporate Office",
-        number: "41-44-333-11-11",
+        number: '+41-44-333-11-11',
       },
       {
         name: "U.S. Office",
-        number: "415-249-2100",
+        number: '+1-415-249-2100',
       },
     ],
   },
@@ -202,11 +225,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: "Chairwoman of the Board Anne Carine Tanum",
-        number: "47-915-04800",
+        number: '+47-915-04800',
       },
       {
         name: "Executive Vice President Communications Even Westerveld",
-        number: "47-400-16-744",
+        number: '+47-400-16-744',
       },
     ],
   },
@@ -247,11 +270,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'Tokyo, Japan Office',
-        number: '81-3-3282-8111',
+        number: '+81-3-3282-8111',
       },
       {
         name: 'New York, US Office',
-        number: '212-224-4000',
+        number: '+1-212-224-4000',
       },
     ],
   },
@@ -265,11 +288,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'Tokyo, Japan Office',
-        number: '81-3-3240-8111',
+        number: '+81-3-3240-8111',
       },
       {
         name: 'New York, U.S. Office',
-        number: '212-782-4000',
+        number: '+1-212-782-4000',
       },
     ],
   },
@@ -291,11 +314,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'Tokyo, Japan Office',
-        number: '81-3-3214-1111',
+        number: '+81-3-3214-1111',
       },
       {
         name: 'New York, U.S. Office',
-        number: '212-282-3000',
+        number: '+1-212-282-3000',
       },
     ],
   },
@@ -309,11 +332,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'Toronto, Canada Corporate Office, Investment Banking',
-        number: '416-307-8500',
+        number: '+1-416-307-8500',
       },
       {
         name: 'New York, U.S. Office',
-        number: '212-827-7000',
+        number: '+1-212-827-7000',
       },
     ],
   },
@@ -335,11 +358,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'Amsterdam Corporate Office',
-        number: '31-10-241-17-2',
+        number: '+31-10-241-17-2',
       },
       {
         name: 'New York, U.S. Office',
-        number: '917-284-6800',
+        number: '+1-917-284-6800',
       },
     ],
   },
@@ -376,11 +399,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'France Corporate Office',
-        number: '33-1-78-40-90-00',
+        number: '+33-1-78-40-90-00',
       },
       {
         name: 'Boston, U.S. Office',
-        number: '617-449-2100',
+        number: '+1-617-449-2100',
       },
     ],
   },
@@ -403,11 +426,11 @@ const banks: Array<Bank> = [
     phoneContacts: [
       {
         name: 'London Office',
-        number: '44-203-145-5000',
+        number: '+44-203-145-5000',
       },
       {
         name: 'U.S. Office',
-        number: '212-407-5000',
+        number: '+1-212-407-5000',
       },
     ],
   },

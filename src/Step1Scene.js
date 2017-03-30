@@ -1,16 +1,16 @@
 // @flow
 
-import React, { Component } from 'react'; // , PropTypes
-import { Alert, Modal, Navigator, Text, TextInput, View } from 'react-native';
+import React, { Component } from 'react';
+import { Alert, Modal, Navigator, StyleSheet, Text, View } from 'react-native';
 
-// import Share from 'react-native-share';
 import Communications from 'react-native-communications';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import Button from './Button';
 import Container from './Container';
-import styles from './styles';
-// import { findBank } from './banks';
+import ProgressIndicatorDots from './ProgressIndicatorDots';
+import TextInput from './TextInput';
+import styles, { px } from './styles';
+import screens from './screens';
 
 // import type is a flow extension, FYI.
 // and it requires airbnb-config-eslint v14 and later
@@ -18,16 +18,58 @@ import styles from './styles';
 // see also: https://github.com/airbnb/javascript/issues/1054
 import type { Bank } from './banks';
 
-// import banks, { findBank } from './banks';
-import colors from './colors';
-import screens from './screens';
+const localStyles = StyleSheet.create({
+  actionTip: {
+    textAlign: 'left',
+    color: '#25A8E1',
+    fontSize: px(16),
+    marginTop: px(26),
+  },
+  textStyle: {
+    fontSize: px(21),
+    letterSpacing: 3,
+  },
+  nextButton: {
+    paddingHorizontal: 80,
+  },
+});
+
 
 type Props = {
   bank: Bank,
-  // bankName: string,
-  navigator: typeof Navigator,
+  navigator: Navigator,
 };
 
+function openCall(number: string) {
+  setTimeout(() => {
+    const prompt = true;
+    Communications.phonecall(number, prompt);
+  }, 300);
+}
+
+function renderCallButton(number: string) {
+  return (
+    <Button
+      title="CALL THEM"
+      accessibilityLabel="Call this bank"
+      buttonStyle={styles.button_narrow}
+      textStyle={localStyles.textStyle}
+      onPress={() => {
+        openCall(number);
+      }}
+    />
+  );
+}
+
+function renderNumberMissing() {
+  return (
+    <Text
+      style={[
+        styles.text,
+        { fontSize: px(22), marginHorizontal: px(30), textAlign: 'center', marginBottom: px(30) }]}
+    >Sorry, we don&#39;t have a phone number yet.</Text>
+  );
+}
 
 class Step1Scene extends Component {
 
@@ -39,24 +81,13 @@ class Step1Scene extends Component {
     textSoFar: ?string,
   };
 
-  // bank: Bank;
-
-  // static findBank(name: string): Bank {
-  //   return banks.find(b => b.name === name);
-  // }
-
-  constructor(props: Props) { // TODO - how to get props from a class method?
+  constructor(props: Props) {
     super(props);
     this.state = {
       modalVisible: false,
       name: undefined,
       textSoFar: undefined,
     };
-
-    // this.bank = findBank(props.bankName);
-
-    // this.bank = this.findBank(props.bankName);
-    // this.bank = banks.find(b => b.name === props.bankName);
 
       // example bank:
       //   {
@@ -111,24 +142,22 @@ class Step1Scene extends Component {
   renderCallInfo() {
     const contacts = this.props.bank.phoneContacts;
 
-    let contactInfo;
-    if (!contacts || !contacts.length) {
-      contactInfo = `Sorry, we don't have a phone number yet.`;
-    } else {
-      contactInfo = contacts[0].number;
+    if (contacts && contacts.length) {
+      return renderCallButton(contacts[0].number);
     }
 
-    return (
-      <Text style={styles.text}>Call them at: { contactInfo } </Text>
-    );
+    return renderNumberMissing();
   }
 
   renderEmailButton() {
     return (
       <Button
-        title="Email this bank"
+        title="EMAIL THEM"
         accessibilityLabel="Email this bank"
-        icon={<Icon style={{ color: "white" }} name="ios-mail-outline" size={26} />}
+        buttonStyle={styles.button_narrow}
+        textStyle={localStyles.textStyle}
+        // icon={<Icon style={{ color: colors.primaryTextColor }}
+        // name="ios-mail-outline" size={26} />}
         onPress={() => {
           if (!this.state.name) {
             this.setModalVisible(true);
@@ -143,10 +172,10 @@ class Step1Scene extends Component {
 
   render() {
     const showCallInfo : boolean = !this.props.bank.emailTo;
+    const showEmailBtn : boolean = this.props.bank.emailTo != null;
 
     return (
-      <Container>
-
+      <Container style={[styles.stepSpaceAbove]}>
         <Modal
           animationType={"slide"}
           transparent={false}
@@ -154,55 +183,69 @@ class Step1Scene extends Component {
           onRequestClose={() => { Alert.alert("Modal has been closed."); }}
         >
           <View
-            style={{ flex: 1, backgroundColor: colors.modalBackground }} // slategrey
+            style={[styles.sceneContainer, styles.spaceBelow]}
           >
-            <View style={styles.spaceAround}>
-              <View style={{ padding: 15 }}>
-                <Text style={styles.text}>What&#8217;s your name?</Text>
-                <Text style={[styles.text, styles.text_size_s]}>(For the email.)</Text>
+            <View style={[styles.spaceBetween, styles.stepSpaceAbove]}>
+              <View>
+                <Text style={styles.text_step}>STEP ONE</Text>
+                <Text style={[styles.text, { textAlign: 'left' }]}>Email signature</Text>
+                <Text
+                  style={[styles.text_minor, { marginBottom: px(36) }]}
+                >Please enter your name to attach it to an email template we prepared earlier.
+                </Text>
                 <TextInput
-                  style={styles.textinput}
-                  placeholder="Firstname Lastname"
+                  // style={styles.textinput}
+                  placeholder="Enter your name here"
                   onChangeText={textSoFar => this.setState({ textSoFar })}
                 />
-                <Text style={[styles.text, styles.text_size_s]}>
-                  Next, your email app will open. Send your email and return to this app.
+                <Text style={[styles.text, styles.text_size_s, localStyles.actionTip]}>
+                  This will prompt your email app to open.
+                  Send your email and return to this app, please.
                 </Text>
-                <Button
-                  accessibilityLabel="Open Email"
-                  title="Open Email"
-                  onPress={() => {
-                    this.setState({ name: this.state.textSoFar });
-                    // console.warn(`Opening email app w/ name: ${this.state.textSoFar}`);
-                    this.openEmail();
-                    this.setModalVisible(false);
-                  }}
-                />
               </View>
             </View>
-            <Button
-              accessibilityLabel="Cancel"
-              title="Cancel"
-              backgroundColor={colors.modalBackground}
-              onPress={() => this.setModalVisible(!this.state.modalVisible)}
-            />
+            <View>
+              <Button
+                accessibilityLabel="Open Email"
+                title="OPEN EMAIL"
+                onPress={() => {
+                  this.setState({ name: this.state.textSoFar });
+                  // console.warn(`Opening email app w/ name: ${this.state.textSoFar}`);
+                  this.openEmail();
+                  this.setModalVisible(false);
+                }}
+              />
+              <Button
+                accessibilityLabel="Cancel"
+                title="CANCEL"
+                buttonStyle={[styles.button_narrow, localStyles.nextButton]}
+                fitContent
+                // buttonStyle={{ borderWidth: 0 }}
+                // backgroundColor={colors.modalBackground}
+                onPress={() => this.setModalVisible(!this.state.modalVisible)}
+              />
+            </View>
           </View>
-
         </Modal>
 
-
-        <View style={styles.spaceAround}>
-          <Text style={styles.text}>Let {this.props.bank.name} know your funds
-          shouldn’t be used to fund
-          the Dakota oil pipeline.
-          </Text>
-          { showCallInfo ? this.renderCallInfo() : null }
+        <View>
+          <View>
+            <Text style={styles.text_step}>STEP ONE</Text>
+            <Text style={[styles.text, { textAlign: 'left' }]}>Let {this.props.bank.name} know your funds
+            should not be used to fund
+            the Dakota oil pipeline.
+            </Text>
+          </View>
         </View>
         <View>
-          { this.props.bank.emailTo ? this.renderEmailButton() : null }
+          { showCallInfo ? this.renderCallInfo() : null }
+          { showEmailBtn ? this.renderEmailButton() : null }
           <Button
-            title="Next"
+            title="NEXT"
             accessibilityLabel="I have emailed my bank."
+            fitContent
+            buttonStyle={[styles.button_narrow, localStyles.nextButton]}
+            textStyle={localStyles.textStyle}
             onPress={() => {
               this.props.navigator.push({
                 title: 'Step 2', // step 2: Switch banks
@@ -210,6 +253,7 @@ class Step1Scene extends Component {
               });
             }}
           />
+          <ProgressIndicatorDots count={4} current={1} />
         </View>
       </Container>
     );
@@ -217,8 +261,3 @@ class Step1Scene extends Component {
 }
 
 export default Step1Scene;
-
-// Step1Scene.propTypes = {
-//   bankName: PropTypes.string.isRequired,
-//   navigator: PropTypes.instanceOf(Navigator).isRequired,
-// };

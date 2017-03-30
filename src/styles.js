@@ -1,35 +1,64 @@
+// @flow
 import { StyleSheet } from 'react-native';
 
+import { height as dotHeight } from './ProgressIndicatorDots';
+
+import colors from './colors';
+import constants from './constants';
+import { px } from './vendor/ResponsiveStyle';
+
+export { em, px } from './vendor/ResponsiveStyle';
+
+const TEXT_STEP_LINEHEIGHT = px(34); // defined here so we can use more than once below
 
 const styles = StyleSheet.create({
   text: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    color: 'white',
-    marginTop: 10,
-    // marginBottom: 10,
+    fontSize: px(30),
+    color: colors.primaryTextColor,
+    marginBottom: px(10),
     textAlign: 'center',
+    fontFamily: 'Museo-700',
   },
   text_impact: {
-    backgroundColor: 'white',
-    color: 'black',
-    // alignSelf: 'center',
-    // paddingHorizontal: 10,
+    backgroundColor: colors.invertBackground,
+    color: colors.invertText,
   },
   text_italic: {
     fontStyle: 'italic',
   },
   text_size_s: {
-    fontSize: 18,
-    marginVertical: 12,
+    fontSize: px(18),
+    marginVertical: px(12),
+  },
+  text_left: {
+    textAlign: 'left',
+  },
+  text_minor: {
+    fontFamily: 'Museo-500',
+    fontSize: px(18),
+    textAlign: 'left',
   },
   text_size_l: {
-    fontSize: 36,
+    fontSize: px(36),
+  },
+  text_step: {
+    color: '#7F7F7F',
+    fontFamily: 'Futura-Bold',
+    fontSize: px(13),
+    lineHeight: px(TEXT_STEP_LINEHEIGHT),
   },
   textinput: {
-    height: 40,
+    height: px(40),
     paddingLeft: 5,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
+  },
+  text_logo: {
+    fontSize: px(18),
+    backgroundColor: colors.invertBackground,
+    color: colors.invertText,
+    padding: px(9),
+    paddingHorizontal: 14,
+    marginTop: px(10),
   },
   tweet_container: {
     borderRadius: 5,
@@ -40,26 +69,45 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
     fontWeight: '300',
   },
+  button_narrow: {
+    paddingVertical: px(8),
+  },
   app: {
-    backgroundColor: '#191919', // lead black
+    backgroundColor: colors.primaryBackground,
+    // marginTop: constants.NAVBAR_HEIGHT, <- doesn't work, pushes nav bar down by navbar height
+  },
+  sceneContainer: {
+    marginTop: px(constants.NAVBAR_HEIGHT),
+    marginHorizontal: px(25),
+    flex: 1,
   },
   container: {
-    // marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
-    marginTop: 64, // above isn't working: evaluates to 44, not 64
     flex: 1,
+  },
+  stepSpaceAbove: {
+    // (space between navbar and large text) - (height of "STEP __")
+    marginTop: px(constants.SPACING_LARGE) - px(TEXT_STEP_LINEHEIGHT),
+  },
+  spaceBelow: {
+    marginBottom: px(dotHeight),
   },
   main: {
     flex: 1,
     justifyContent: 'space-between',
-    marginTop: 10,
   },
-  spaceAround: {
+  spaceBetween: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+  },
+  debug_highlight: {
+    backgroundColor: 'yellow',
   },
 });
 
 export default styles;
+
+// keep here: screenHeight will update when orientation changes
+// const screenHeight = Dimensions.get('window').height;
 
 // styles.js
 // export default {

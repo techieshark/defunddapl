@@ -18,6 +18,16 @@
 {
   NSURL *jsCodeLocation;
 
+  // added to see fonts, per https://medium.com/@dabit3/adding-custom-fonts-to-react-native-b266b41bff7f#.5la9v1u9j
+    // for (NSString* family in [UIFont familyNames])
+    // {
+    //   NSLog(@"%@", family);
+    //   for (NSString* name in [UIFont fontNamesForFamilyName: family])
+    //   {
+    //     NSLog(@" %@", name);
+    //   }
+    // }
+
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation

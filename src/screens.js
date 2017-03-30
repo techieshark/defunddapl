@@ -1,8 +1,9 @@
+// @flow
 /* export types */
 
 const screens = {
   SPLASH: 'splash',
-  // HOME: 'home',
+  HOME: 'home',
   LOOKUP: 'lookup',
   REPORT: 'report',
   STEP1: 'step1',

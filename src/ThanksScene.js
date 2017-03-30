@@ -1,26 +1,60 @@
+// @flow
 import React from 'react';
-import { Navigator, Text, View } from 'react-native';
+import { Navigator, StyleSheet, Text, View } from 'react-native';
 
+import Button from './Button';
 import Container from './Container';
-// import screens from './screens';
-import styles from './styles';
+import DivestedTotal from './DivestedTotal';
+import constants from './constants';
+import screens from './screens';
+import styles, { px } from './styles';
 
-function ThanksScene() {
+const localStyles = StyleSheet.create({
+  finishBtnText: { // based on Step4Scene textStyle
+    fontSize: px(21),
+    letterSpacing: 3,
+  },
+  finishBtn: {
+    paddingHorizontal: px(20),
+  },
+});
+
+type Props = {
+  navigator: Navigator,
+};
+
+function ThanksScene(props: Props) {
   return (
-    <Container style={styles.spaceAround}>
+    <Container
+      style={[
+        styles.spaceBelow,
+        { marginTop: px(constants.SPACING_LARGE) }]}
+    >
       <View>
-        <Text style={styles.text}>Thanks!</Text>
+        <View>
+          <Text style={[styles.text, { textAlign: 'left', fontSize: px(28) }]}>Thank you for standing with Standing Rock!</Text>
+        </View>
+        <DivestedTotal />
+        <View>
+          <Text style={[styles.text_minor, { fontSize: px(19), fontFamily: 'Museo-300', marginTop: px(15) }]}>
+            Total personal accounts divested from the Dakota Access Pipeline.
+          </Text>
+        </View>
       </View>
-      <View>
-        <Text style={styles.text}>You're the best.</Text>
-      </View>
+      <Button
+        title="RETURN TO START"
+        accessibilityLabel="Return to Start"
+        buttonStyle={[styles.button_narrow, localStyles.finishBtn]}
+        textStyle={localStyles.finishBtnText}
+        onPress={() => {
+          props.navigator.push({
+            title: 'Start',
+            screen: screens.HOME,
+          });
+        }}
+      />
     </Container>
   );
 }
 
-
 export default ThanksScene;
-
-// ThanksScene.propTypes = {
-//   navigator: PropTypes.instanceOf(Navigator).isRequired,
-// };

@@ -37,6 +37,9 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Museo300-Regular.otf</string>
+		<string>Museo500-Regular.otf</string>
+		<string>Museo700-Regular.otf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>FontAwesome.ttf</string>

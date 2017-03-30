@@ -1,35 +1,54 @@
-import React, { PropTypes } from 'react';
-import { Alert, Linking, Navigator, Text, View, WebView } from 'react-native';
+// @flow
+import React from 'react';
+import { Alert, Linking, Navigator, StyleSheet, Text, View } from 'react-native';
 
 import Button from './Button';
 import Container from './Container';
+import Gallery from './Gallery';
+import ProgressIndicatorDots from './ProgressIndicatorDots';
 import screens from './screens';
-import styles from './styles';
+import styles, { px } from './styles';
 
-// // <View style={[styles.container, styles.main]}>
-//       <View style={{ marginTop: 70 }}>
-//         <Text style={styles.text}>step 4</Text>
-//       </View>
+const localStyles = StyleSheet.create({
+  textStyle: {
+    fontSize: px(21),
+    letterSpacing: 3,
+  },
+  buttonStyleExtraPadding: {
+    paddingHorizontal: px(15),
+  },
+  nextButton: {
+    paddingHorizontal: px(80),
+  },
+});
 
-function Step4Scene(props) {
+type Props = {
+  navigator: Navigator,
+}
+
+
+function Step4Scene(props: Props) {
   return (
-    <Container>
+    <Container style={styles.stepSpaceAbove}>
       <View>
-        <Text style={styles.text}>Post about #DefundDAPL. Find inspiration below.
-        </Text>
+        <Text style={styles.text_step}>STEP FOUR</Text>
+        <Text
+          style={[styles.text, styles.text_left, { fontSize: 26 }]}
+        >Post about #DefundDAPL</Text>
+        <Text style={[styles.text_minor]}>Find inspiration below</Text>
       </View>
-      <WebView
-        source={{ uri: 'https://www.instagram.com/explore/tags/defunddapl/' }}
-        style={{ marginTop: 20 }}
-      />
+      <Gallery />
       <Button
-        title="Open Instagram"
+        title="OPEN INSTAGRAM" // TODO what if they don't have instagram installed?
         accessibilityLabel="Post on Instagram"
+        fitContent
+        buttonStyle={[styles.button_narrow, localStyles.buttonStyleExtraPadding]}
+        textStyle={localStyles.textStyle}
         onPress={() => {
-          const url = 'instagram://app';
+          const url = 'instagram://tag?name=defunddapl'; // or just /app
           Alert.alert(
             'Opens Instagram',
-            `Return after you've posted.`,
+            `Return after you post.`,
             [
               {
                 text: 'Roger that!',
@@ -42,8 +61,11 @@ function Step4Scene(props) {
         }}
       />
       <Button
-        title="Next"
+        title="NEXT"
         accessibilityLabel="I have posted on Instagram"
+        fitContent
+        buttonStyle={[styles.button_narrow, localStyles.nextButton]}
+        textStyle={localStyles.textStyle}
         onPress={() => {
           props.navigator.push({
             title: 'Step 5', // : Organize for #DefundDAPL.
@@ -51,6 +73,7 @@ function Step4Scene(props) {
           });
         }}
       />
+      <ProgressIndicatorDots count={4} current={4} />
     </Container>
   );
 }
@@ -58,6 +81,3 @@ function Step4Scene(props) {
 
 export default Step4Scene;
 
-Step4Scene.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-};

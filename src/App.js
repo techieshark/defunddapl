@@ -9,6 +9,7 @@ import { Navigator, StyleSheet, Text, TouchableHighlight, View } from 'react-nat
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import StartScreen from './StartScreen';
 import BankReportScene from './BankReportScene';
 import BankCheckScene from './BankCheckScene';
 import Step1Scene from './Step1Scene';
@@ -20,7 +21,7 @@ import ThanksScene from './ThanksScene';
 
 import colors from './colors';
 import screens from './screens';
-import styles from './styles';
+import styles, { px } from './styles';
 
 const appStyles = StyleSheet.create({
   navBar: {
@@ -30,27 +31,29 @@ const appStyles = StyleSheet.create({
   backBtnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 120,
-    height: 44,
-    marginLeft: 10,
+    width: px(120),
+    height: px(44),
+    marginLeft: px(10),
   },
   backBtnText: {
     color: colors.black,
-    fontWeight: "bold",
     paddingLeft: 1,
     paddingTop: -1,
   },
-  navTitleText: {
-    fontWeight: "bold",
-    paddingTop: 10,
+  navText: {
+    fontWeight: 'bold',
+    paddingTop: px(10),
+    fontSize: px(16),
   },
 });
+
+// XX initialRoute={{ title: '#DefundDAPL', screen: screens.HOME }}
 
 function App() {
   return (
     <Navigator
       style={styles.app}
-      initialRoute={{ title: '#DefundDAPL', screen: screens.LOOKUP }} // title: 'Check your bank'
+      initialRoute={{ title: 'Start', screen: screens.HOME }}
       navigationBar={
         /* not sure why eslint barfs without the following turned off;
            maybe too complex for it to detect component? or the null? */
@@ -67,15 +70,15 @@ function App() {
                   underlayColor={colors.transparent}
                 >
                   <View style={appStyles.backBtnContainer} >
-                    <Icon name="ios-arrow-back" size={26} />
-                    <Text style={appStyles.backBtnText} >
+                    <Icon name="ios-arrow-back" size={px(26)} />
+                    <Text style={[appStyles.navText, appStyles.backBtnText]} >
                       {navState.routeStack[index - 1].title}
                     </Text>
                   </View>
                 </TouchableHighlight>
               );
             },
-            Title: route => <Text style={appStyles.navTitleText}>{ route.title }</Text>,
+            Title: route => <Text style={[appStyles.navText]}>{ route.title }</Text>,
             RightButton: () => <Text />,
           }}
           style={appStyles.navBar}
@@ -89,6 +92,13 @@ function App() {
       renderScene={(route, navigator) => {
         let nextScene;
         switch (route.screen) {
+          case screens.HOME:
+            nextScene = (
+              <StartScreen
+                navigator={navigator}
+              />
+            );
+            break;
           case screens.LOOKUP:
             nextScene = (
               <BankCheckScene
@@ -158,7 +168,12 @@ function App() {
               </View>
             );
         }
-        return nextScene;
+
+        return (
+          <View style={styles.sceneContainer}>
+            { nextScene }
+          </View>
+        );
       }}
     />
   );

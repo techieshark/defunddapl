@@ -1,33 +1,53 @@
-import React, { PropTypes } from 'react';
-import { Alert, Linking, Navigator, Text, View } from 'react-native';
+// @flow
+import React from 'react';
+import { Alert, Linking, Navigator, StyleSheet, Text, View } from 'react-native';
 
 import Button from './Button';
 import Container from './Container';
 import screens from './screens';
-import styles from './styles';
+import styles, { px } from './styles';
 
-/*
-     <View style={[styles.container, styles.main]}>
-      <View style={{ marginTop:70 }}>
-        <Text style={styles.text}>step 5</Text>
-      </View>
-*/
 
-function Step5Scene(props) {
+const localStyles = StyleSheet.create({
+  textStyle: {
+    fontSize: px(21),
+    letterSpacing: 3,
+  },
+  nextButton: {
+    paddingHorizontal: px(40),
+  },
+});
+
+type Props = {
+  navigator: Navigator,
+}
+
+function Step5Scene(props: Props) {
   return (
-    <Container>
+    <Container style={[styles.container, styles.stepSpaceAbove, styles.spaceBelow]}>
       <View>
-        <Text style={styles.text}>Help the #DefundDAPL campaign near you.</Text>
+        <Text style={styles.text_step}>STEP FIVE</Text>
+        <Text
+          style={[styles.text, styles.text_left, { fontSize: 26 }]}
+        >Help the #DefundDAPL campaign near you.</Text>
       </View>
       <View>
+        <Text
+          style={{
+            fontFamily: 'Museo-700',
+            fontSize: px(20),
+            textAlign: 'center',
+            marginBottom: px(10),
+          }}
+        >Help the movement near you</Text>
         <Button
-          title="Find an action"
+          title="FIND AN ACTION"
           accessibilityLabel="Find an action"
           onPress={() => {
             const url = 'http://everydayofaction.org';
             Alert.alert(
               'Come back soon!',
-              `Return after you've found an action`,
+              `Return after you find an action`,
               [
                 {
                   text: 'Will do!',
@@ -40,7 +60,7 @@ function Step5Scene(props) {
           }}
         />
         <Button
-          title="Create an action"
+          title="CREATE AN ACTION"
           accessibilityLabel="Create an action"
           onPress={() => {
             const url = 'https://actionnetwork.org/events/8688b2f23f325de5343d6101c92f4107abb5620d/edit';
@@ -60,8 +80,11 @@ function Step5Scene(props) {
         />
       </View>
       <Button
-        title="That's it!"
-        accessibilityLabel="I did some organizing"
+        title="FINISH"
+        accessibilityLabel="Finish"
+        fitContent
+        buttonStyle={[styles.button_narrow, localStyles.nextButton]}
+        textStyle={localStyles.textStyle}
         onPress={() => {
           props.navigator.push({
             title: 'Thanks!',
@@ -75,7 +98,3 @@ function Step5Scene(props) {
 
 
 export default Step5Scene;
-
-Step5Scene.propTypes = {
-  navigator: PropTypes.instanceOf(Navigator).isRequired,
-};

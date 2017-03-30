@@ -8,6 +8,7 @@ import React from 'react';
 import { Navigator, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import codePush from 'react-native-code-push';
 
 import StartScreen from './StartScreen';
 import BankReportScene from './BankReportScene';
@@ -178,6 +179,8 @@ function App() {
     />
   );
 }
+
+App = codePush(App); // eslint-disable-line no-func-assign
 
 export default App;
 

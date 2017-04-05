@@ -33,6 +33,9 @@ push-rollout-100:
 push-stats:
 	code-push deployment ls $(APPNAME) # add -k to get keys
 
+xcode-release:
+	# see https://stackoverflow.com/questions/30960081/how-to-submit-an-ios-app-to-the-app-store-itunes-connect-using-xcode#30961923
+	# make screenshots on 7plus simulator, and upload to itunes connect https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Appendices/Properties.html#//apple_ref/doc/uid/TP40011225-CH26-SW2
 console:
 	react-native log-ios
 	# react-native log-android

@@ -12,8 +12,26 @@ flow:
 test:
 	npm run test
 
-codepush:
-	code-push release-react defunddapl ios
+APPNAME=defunddapl
+
+push-stage:
+	code-push release-react $(APPNAME) ios -d Staging
+
+push-promote:
+	code-push promote $(APPNAME) Staging Production --description "New features and bugfixes"
+
+push-release:
+	code-push release-react $(APPNAME) ios -d Production
+
+push-rollout-20:
+	code-push promote $(APPNAME) Staging Production -r 20%
+	# If no complaints from 20% of users, push-rollout-100 to push to all
+
+push-rollout-100:
+	code-push promote $(APPNAME) Staging Production -r 100%
+
+push-stats:
+	code-push deployment ls $(APPNAME) # add -k to get keys
 
 console:
 	react-native log-ios

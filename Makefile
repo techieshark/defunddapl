@@ -12,6 +12,9 @@ flow:
 test:
 	npm run test
 
+codepush:
+	code-push release-react defunddapl ios
+
 console:
 	react-native log-ios
 	# react-native log-android

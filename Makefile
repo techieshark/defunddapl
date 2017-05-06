@@ -6,6 +6,16 @@ run:
 run-dev:
 	react-native run-ios --device $(REACT_NATIVE_DEVICE)
 
+run-5:
+	react-native run-ios --simulator "iPhone 5"
+
+run-6:
+	react-native run-ios --simulator "iPhone 6"
+
+run-7:
+	react-native run-ios --simulator "iPhone 7"
+
+
 flow:
 	 npm run-script flow
 

@@ -2,40 +2,17 @@
 import React, { Component } from 'react';
 
 import {
-  StyleSheet,
-  Text,
   ListView,
   ScrollView,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
-import Button from './Button';
+import Button, { ButtonVariants } from './Button';
 import TextInput from './TextInput';
 
 import type { Bank } from './banks';
 
 import banks from './banks';
-import colors from './colors';
-import { px } from './styles';
-
-const localStyles = StyleSheet.create({
-  resultButton: {
-    justifyContent: 'flex-start',
-    marginBottom: 0,
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    borderColor: colors.black,
-    paddingVertical: 0,
-  },
-  result_text: {
-    paddingVertical: px(10),
-    paddingLeft: px(5),
-    fontFamily: 'Museo-700',
-    fontSize: px(20),
-    letterSpacing: 0,
-  },
-});
 
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -85,10 +62,9 @@ class BankSearch extends Component {
             onPress={() => this.props.onClickResult(this.state.searchedText)}
             title={`${this.state.searchedText ? `“${this.state.searchedText}”` : ''}`}
             buttonStyle={[
-              localStyles.resultButton,
               !this.state.searchedText && { opacity: 0 }, /* completely hide disabled button */
             ]}
-            textStyle={localStyles.result_text}
+            type={ButtonVariants.LIST} // or use btn for ios-search?
             disabled={!this.state.searchedText}
             accessibilityLabel={`Search for ${this.state.searchedText}`}
           />
@@ -97,20 +73,12 @@ class BankSearch extends Component {
           <ListView
             dataSource={ds.cloneWithRows(this.state.searchResults)}
             renderRow={bank => (
-              <View style={localStyles.resultButton}>
-                <TouchableHighlight
-                  underlayColor={colors.highlight}
-                  onPress={() => this.props.onClickResult(bank.name)}
-                >
-                  <View>
-                    <Text
-                      style={localStyles.result_text}
-                    >
-                      {bank.name}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
+              <Button
+                accessibilityLabel={bank.name}
+                title={bank.name}
+                type={ButtonVariants.LIST}
+                onPress={() => this.props.onClickResult(bank.name)}
+              />
             )}
             enableEmptySections // needed to avoid warning; see https://github.com/FaridSafi/react-native-gifted-listview/issues/39#issuecomment-217073492
           />

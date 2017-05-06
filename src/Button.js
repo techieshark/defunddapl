@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import { ColorPropType, StyleSheet, Text, TouchableHighlight, View } from 'react-native'; // ImageSourcePropType,
 
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import stylePropType from 'react-style-proptype';
 
 import { px } from './styles';
@@ -25,6 +25,11 @@ const localStyles = StyleSheet.create({
     backgroundColor: colors.primaryBackground,
 
   },
+  spreadRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   button: {
     borderColor: colors.primaryTextColor,
     borderWidth: 1,
@@ -43,12 +48,41 @@ const localStyles = StyleSheet.create({
     fontFamily: 'Futura-Bold',
     letterSpacing: 1,
   },
+
+  listButton: {
+    justifyContent: 'flex-start',
+    marginBottom: 0,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderColor: colors.black,
+    paddingVertical: 0,
+  },
+  listButtonText: {
+    paddingVertical: px(10),
+    paddingLeft: px(5),
+    fontFamily: 'Museo-700',
+    fontSize: px(20),
+    letterSpacing: 0,
+  },
+
+
   icon: {
     marginLeft: 10,
     marginRight: 10,
   },
 });
 
+/* We provide a couple different types of buttons.
+ * The default is "NORMAL", and looks like what we normally
+ * think of buttons: centered text, surrounded with a border.
+ * The other is "LIST", and these buttons only have a bottom border,
+ * plus the text is a bit lighter.
+*/
+type ButtonVariant = "NORMAL" | "LIST";
+export const ButtonVariants = {
+  NORMAL: "NORMAL",
+  LIST: "LIST",
+};
 
 type Props = {
   accessibilityLabel: string,
@@ -60,9 +94,10 @@ type Props = {
   onPress: () => any,
   backgroundColor?: string,
   backgroundColor?: ColorPropType,
-  buttonStyle?: stylePropType.supportingArrays, // or stylePropType.supportingArrays
+  buttonStyle?: stylePropType.supportingArrays,
   textStyle?: stylePropType,
   title: string,
+  type?: ButtonVariant,
 };
 
 const defaultProps: Props = {
@@ -79,6 +114,15 @@ const defaultProps: Props = {
   title: '',
 };
 
+
+function RightIcon(name: string) {
+  return (
+    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <Icon name={name} size={px(26)} />
+    </View>
+  );
+}
+
 function Button(props: Props) {
   let iconElement;
   if (props.icon) {
@@ -88,6 +132,8 @@ function Button(props: Props) {
       </View>
     );
   }
+
+  const isListBtn = props.type === ButtonVariants.LIST;
 
   return (
     <View
@@ -112,21 +158,29 @@ function Button(props: Props) {
         <View
           style={[
             localStyles.button,
+            isListBtn && localStyles.listButton,
             props.buttonStyle && props.buttonStyle,
             props.disabled && { backgroundColor: colors.disabled },
           ]}
         >
-          {
-            props.icon && iconElement
-          }
-          <Text
-            style={[
-              localStyles.buttonText,
-              props.textStyle && props.textStyle,
-            ]}
-          >
-            {props.title}
-          </Text>
+          <View style={isListBtn && localStyles.spreadRow}>
+            <View>
+              {
+                props.icon && iconElement
+              }
+              <Text
+                style={[
+                  localStyles.buttonText,
+                  isListBtn && localStyles.listButtonText,
+                  props.textStyle && props.textStyle,
+                  // style={localStyles.result_text}
+                ]}
+              >
+                {props.title}
+              </Text>
+            </View>
+            {isListBtn && RightIcon('ios-arrow-forward')}
+          </View>
         </View>
       </TouchableHighlight>
     </View>

@@ -29,7 +29,7 @@ class DivestedTotal extends Component {
     super();
 
     this.state = {
-      dollarsText: '$73,324,566.85',
+      dollarsText: '$79,324,566.85',
       // TODO: this should be stored in global app state and saved, so it doesn't
       // appear to "reset" every time the screen is opened.
     };

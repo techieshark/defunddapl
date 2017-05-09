@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
+import colors from './colors';
 import getDivestmentTotal from './divestment';
 import Amount from './Amount';
 
@@ -13,6 +14,9 @@ const localStyles = StyleSheet.create({
     fontSize: px(33),
     textAlign: 'center',
     paddingVertical: px(13),
+    borderWidth: 1,
+    borderColor: 'teal',
+    backgroundColor: colors.schemes.standingRock.blue,
   },
 });
 

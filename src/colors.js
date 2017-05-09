@@ -23,6 +23,7 @@ const schemes = {
 };
 
 const colors = {
+  schemes, // include all schemes above
   // primary: schemes.standingRock.blue,
   primary: schemes.standingRock.steelblue,
   white: schemes.plain.white,

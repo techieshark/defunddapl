@@ -10,6 +10,10 @@ import screens from './screens';
 import styles, { px } from './styles';
 
 const localStyles = StyleSheet.create({
+  text_header: {
+    textAlign: 'left',
+    fontSize: px(28),
+  },
   finishBtnText: { // based on Step4Scene textStyle
     fontSize: px(21),
     letterSpacing: 3,
@@ -41,11 +45,13 @@ function ThanksScene(props: Props) {
     >
       <View>
         <View>
-          <Text style={[styles.text, { textAlign: 'left', fontSize: px(28) }]}>Thank you for standing with Standing Rock!</Text>
+          <Text style={[styles.text, localStyles.text_header]}>
+            Thank you for standing with Standing Rock!
+          </Text>
         </View>
         <DivestedTotal />
         <View>
-          <Text style={[styles.text_minor, { fontSize: px(19), fontFamily: 'Museo-300', marginTop: px(15) }]}>
+          <Text style={[styles.text_minor, localStyles.text_mini]}>
             Total personal accounts divested from the Dakota Access Pipeline.
           </Text>
           <View style={localStyles.spacer} />

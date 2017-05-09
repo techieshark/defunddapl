@@ -17,6 +17,15 @@ const localStyles = StyleSheet.create({
   finishBtn: {
     paddingHorizontal: px(20),
   },
+  text_mini: {
+    fontSize: px(19),
+    fontFamily: 'Museo-300',
+    marginTop: px(15),
+  },
+  spacer: {
+    height: 0,
+    marginTop: 10,
+  },
 });
 
 type Props = {
@@ -38,6 +47,10 @@ function ThanksScene(props: Props) {
         <View>
           <Text style={[styles.text_minor, { fontSize: px(19), fontFamily: 'Museo-300', marginTop: px(15) }]}>
             Total personal accounts divested from the Dakota Access Pipeline.
+          </Text>
+          <View style={localStyles.spacer} />
+          <Text style={[styles.text_minor, localStyles.text_mini]}>
+            Plus over $5 billion in city and institutional divestments!
           </Text>
         </View>
       </View>

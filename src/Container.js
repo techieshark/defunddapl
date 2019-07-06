@@ -25,9 +25,11 @@ type Props = {
 
 
 function Container(props: Props) {
+  const { children, style } = props;
+
   return (
-    <View style={[localStyles.container, props.style]}>
-      {props.children}
+    <View style={[localStyles.container, style]}>
+      {children}
     </View>
   );
 }

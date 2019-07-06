@@ -23,14 +23,15 @@ type Props = {
 };
 
 function Amount(props: Props) {
+  const { amount, textStyle } = props;
   return (
     <Text
       style={[
         styles.text_impact, localStyles.textStyle,
-        props.textStyle && props.textStyle,
+        textStyle && textStyle,
       ]}
     >
-      { props.amount }
+      { amount }
     </Text>
   );
 }

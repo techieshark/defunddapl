@@ -58,14 +58,15 @@ type Props = {
 
 /* ·•·· */
 function ProgressIndicatorDots(props: Props) {
+  const { count, current, style } = props;
   return (
-    <View style={[localStyles.container, props.style]}>
-      {Array.from(Array(props.count), (_, i) => (
+    <View style={[localStyles.container, style]}>
+      {Array.from(Array(count), (_, i) => (
         <View key={i}>
           <Text
             style={[
               localStyles.dot,
-              i === (props.current - 1) && localStyles.dot_active,
+              i === (current - 1) && localStyles.dot_active,
             ]}
           >
 ·

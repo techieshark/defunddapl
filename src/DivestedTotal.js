@@ -42,8 +42,9 @@ class DivestedTotal extends Component {
   }
 
   render() {
+    const { dollarsText } = this.state;
     return (
-      <Amount amount={this.state.dollarsText} textStyle={localStyles.amountText} />
+      <Amount amount={dollarsText} textStyle={localStyles.amountText} />
     );
   }
 }

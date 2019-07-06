@@ -13,15 +13,16 @@ type Props = {
 };
 
 function BankReportScene(props: Props) {
-  const maybeBank = findBank(props.bankName); // bank, or undefined if not found
+  const { bankName, navigator } = props;
+  const maybeBank = findBank(bankName); // bank, or undefined if not found
 
   const bankView = maybeBank ? (
     <GuiltyBank
       bank={maybeBank}
-      navigator={props.navigator}
+      navigator={navigator}
     />
   ) : (
-    <InnocentBank bankName={props.bankName} />
+    <InnocentBank bankName={bankName} />
   );
 
   return (

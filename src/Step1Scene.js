@@ -109,6 +109,7 @@ class Step1Scene extends Component {
 
   getMsgBody() {
     const { bank } = this.props;
+    const { name } = this.state;
 
     const anonymousUser = 'Your former customer';
     const msgBody = `Dear ${bank.emailAddressee}:
@@ -125,7 +126,7 @@ class Step1Scene extends Component {
       + `I will no longer be banking with ${bank.name}.
 
       Sincerely,
-      ${this.state.name || anonymousUser}`;
+      ${name || anonymousUser}`;
     return msgBody;
   }
 
@@ -134,10 +135,11 @@ class Step1Scene extends Component {
   }
 
   openEmail() {
+    const { bank } = this.props;
     setTimeout(() => {
       Communications.email(
-        this.props.bank.emailTo,
-        this.props.bank.emailCC,
+        bank.emailTo,
+        bank.emailCC,
         null /* bcc */,
         'Divesting from the Dakota Pipeline', /* subject */
         this.getMsgBody(),
@@ -146,7 +148,9 @@ class Step1Scene extends Component {
   }
 
   renderCallInfo() {
-    const contacts = this.props.bank.phoneContacts;
+    const { bank } = this.props;
+
+    const contacts = bank.phoneContacts;
 
     if (contacts && contacts.length) {
       return renderCallButton(contacts[0].number);
@@ -156,6 +160,8 @@ class Step1Scene extends Component {
   }
 
   renderEmailButton() {
+    const { name } = this.state;
+
     return (
       <Button
         title="EMAIL THEM"
@@ -165,7 +171,7 @@ class Step1Scene extends Component {
         // icon={<Icon style={{ color: colors.primaryTextColor }}
         // name="ios-mail-outline" size={26} />}
         onPress={() => {
-          if (!this.state.name) {
+          if (!name) {
             this.setModalVisible(true);
           } else {
             // console.warn(`Sending email using name: ${this.state.name}`);
@@ -177,15 +183,18 @@ class Step1Scene extends Component {
   }
 
   render() {
-    const showCallInfo: boolean = !this.props.bank.emailTo;
-    const showEmailBtn: boolean = this.props.bank.emailTo != null;
+    const { bank, navigator } = this.props;
+    const { modalVisible, textSoFar } = this.state;
+
+    const showCallInfo: boolean = !bank.emailTo;
+    const showEmailBtn: boolean = bank.emailTo != null;
 
     return (
       <Container style={[styles.stepSpaceAbove]}>
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.state.modalVisible}
+          visible={modalVisible}
           onRequestClose={() => { Alert.alert("Modal has been closed."); }}
         >
           <View
@@ -203,7 +212,7 @@ Please enter your name to attach it to an email template we prepared earlier.
                 <TextInput
                   // style={styles.textinput}
                   placeholder="Enter your name here"
-                  onChangeText={textSoFar => this.setState({ textSoFar })}
+                  onChangeText={text => this.setState({ textSoFar: text })}
                 />
                 <Text style={[styles.text, styles.text_size_s, localStyles.actionTip]}>
                   This will prompt your email app to open.
@@ -216,7 +225,7 @@ Please enter your name to attach it to an email template we prepared earlier.
                 accessibilityLabel="Open Email"
                 title="OPEN EMAIL"
                 onPress={() => {
-                  this.setState({ name: this.state.textSoFar });
+                  this.setState({ name: textSoFar });
                   // console.warn(`Opening email app w/ name: ${this.state.textSoFar}`);
                   this.openEmail();
                   this.setModalVisible(false);
@@ -229,7 +238,7 @@ Please enter your name to attach it to an email template we prepared earlier.
                 fitContent
                 // buttonStyle={{ borderWidth: 0 }}
                 // backgroundColor={colors.modalBackground}
-                onPress={() => this.setModalVisible(!this.state.modalVisible)}
+                onPress={() => this.setModalVisible(!modalVisible)}
               />
             </View>
           </View>
@@ -240,7 +249,7 @@ Please enter your name to attach it to an email template we prepared earlier.
             <Text style={styles.text_step}>STEP ONE</Text>
             <Text style={[styles.text, { textAlign: 'left' }]}>
 Let
-              {this.props.bank.name}
+              {bank.name}
               {' '}
 know your funds
             should not be used to fund
@@ -258,7 +267,7 @@ know your funds
             buttonStyle={[styles.button_narrow, localStyles.nextButton]}
             textStyle={localStyles.textStyle}
             onPress={() => {
-              this.props.navigator.push({
+              navigator.push({
                 title: 'Step 2', // step 2: Switch banks
                 screen: screens.STEP2,
               });

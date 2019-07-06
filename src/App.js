@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import {
- Navigator, StyleSheet, Text, TouchableHighlight, View 
+  Navigator, StyleSheet, Text, TouchableHighlight, View,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -64,7 +64,7 @@ class App extends Component {
       <Navigator
         style={styles.app}
         initialRoute={{ title: 'Start', screen: screens.HOME }}
-        navigationBar={
+        navigationBar={(
           /* not sure why eslint barfs without the following turned off;
              maybe too complex for it to detect component? or the null? */
           /* eslint-disable react/display-name */
@@ -79,9 +79,9 @@ class App extends Component {
                     onPress={() => navigator.pop()}
                     underlayColor={colors.transparent}
                   >
-                    <View style={appStyles.backBtnContainer} >
+                    <View style={appStyles.backBtnContainer}>
                       <Icon name="ios-arrow-back" size={px(26)} />
-                      <Text style={[appStyles.navText, appStyles.backBtnText]} >
+                      <Text style={[appStyles.navText, appStyles.backBtnText]}>
                         {navState.routeStack[index - 1].title}
                       </Text>
                     </View>
@@ -94,7 +94,7 @@ class App extends Component {
             style={appStyles.navBar}
           />
           /* eslint-enable react/display-name */
-        }
+        )}
 
         configureScene={() => Navigator.SceneConfigs.HorizontalSwipeJump}
 
@@ -182,7 +182,7 @@ class App extends Component {
                     style={[styles.text, styles.text_size_s]}
                   >
 How did we get here?? Unhandled Navigation case.
-</Text>
+                  </Text>
                 </View>
               );
           }

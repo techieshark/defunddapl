@@ -28,6 +28,7 @@ type Props = {
 };
 
 function GuiltyBank(props: Props) {
+  const { bank, navigator } = props;
   return (
     <View
       style={[
@@ -42,11 +43,11 @@ function GuiltyBank(props: Props) {
             { fontSize: px(30), textAlign: 'left' },
           ]}
         >
-          { props.bank.name }
+          { bank.name }
           {' '}
 is funding the Dakota Access Pipeline with
         </Text>
-        <Amount amount={props.bank.amount} textStyle={localStyles.amountText} />
+        <Amount amount={bank.amount} textStyle={localStyles.amountText} />
         <Text
           style={[styles.text, { fontSize: px(22), textAlign: 'left' }]}
         >
@@ -56,10 +57,10 @@ belonging to you and other customers.
       </ScrollView>
       <Button
         color="white"
-        onPress={() => props.navigator.push({
+        onPress={() => navigator.push({
           title: 'Step 1', // Defund DAPL: Step 1
           screen: screens.STEP1,
-          bank: props.bank,
+          bank,
         })}
         title="DEFUND THEM"
         accessibilityLabel="Divest from your bank"

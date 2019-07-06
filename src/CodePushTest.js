@@ -3,7 +3,6 @@
 import React from 'react';
 import {
   Alert,
-  Navigator,
   Text,
   View,
 } from 'react-native';
@@ -15,11 +14,7 @@ import styles, { px } from './styles';
 
 import Button from './Button';
 
-type Props = {
-  navigator: Navigator,
-};
-
-function CodePushTest(props: Props) {
+function CodePushTest() {
   // keep here: screenHeight will update when orientation changes
   // const screenHeight = Dimensions.get('window').height;
 // flexDirection: 'row'

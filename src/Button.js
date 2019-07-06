@@ -126,34 +126,39 @@ function RightIcon(name: string) {
 }
 
 function Button(props: Props) {
+  const {
+    accessibilityLabel, backgroundColor, buttonStyle, disabled, emphasis,
+    fitContent, fullWidth, icon, onPress, textStyle, title, type,
+  } = props;
+
   let iconElement;
-  if (props.icon) {
+  if (icon) {
     iconElement = (
       <View style={localStyles.icon}>
-        {props.icon}
+        {icon}
       </View>
     );
   }
 
-  const isListBtn = props.type === ButtonVariants.LIST;
+  const isListBtn = type === ButtonVariants.LIST;
 
   return (
     <View
       style={[
-        props.emphasis && localStyles.emphasis,
-        props.fullWidth && localStyles.fullWidth,
+        emphasis && localStyles.emphasis,
+        fullWidth && localStyles.fullWidth,
         { alignSelf: 'stretch' },
-        props.fitContent && localStyles.fitContent,
+        fitContent && localStyles.fitContent,
       ]}
     >
       <TouchableHighlight
-        accessibilityLabel={props.accessibilityLabel}
+        accessibilityLabel={accessibilityLabel}
         activeOpacity={0.5}
-        disabled={props.disabled}
-        onPress={props.onPress}
+        disabled={disabled}
+        onPress={onPress}
         style={[
           localStyles.buttonContainer,
-          props.backgroundColor && { backgroundColor: props.backgroundColor },
+          backgroundColor && { backgroundColor },
         ]}
         underlayColor={colors.highlight}
       >
@@ -161,24 +166,24 @@ function Button(props: Props) {
           style={[
             localStyles.button,
             isListBtn && localStyles.listButton,
-            props.buttonStyle && props.buttonStyle,
-            props.disabled && { backgroundColor: colors.disabled },
+            buttonStyle && buttonStyle,
+            disabled && { backgroundColor: colors.disabled },
           ]}
         >
           <View style={isListBtn && localStyles.spreadRow}>
             <View>
               {
-                props.icon && iconElement
+                icon && iconElement
               }
               <Text
                 style={[
                   localStyles.buttonText,
                   isListBtn && localStyles.listButtonText,
-                  props.textStyle && props.textStyle,
+                  textStyle && textStyle,
                   // style={localStyles.result_text}
                 ]}
               >
-                {props.title}
+                {title}
               </Text>
             </View>
             {isListBtn && RightIcon('ios-arrow-forward')}

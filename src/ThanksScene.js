@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { Navigator, StyleSheet, Text, View } from 'react-native';
+import {
+  Navigator, StyleSheet, Text, View,
+} from 'react-native';
 
 import Button from './Button';
 import Container from './Container';

@@ -1,7 +1,9 @@
 // @flow
 
 import React from 'react';
-import { Alert, Linking, Navigator, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert, Linking, Navigator, StyleSheet, Text, View,
+} from 'react-native';
 
 import Button from './Button';
 import Container from './Container';
@@ -35,7 +37,9 @@ function Step2Scene(props: Props) {
           <Text style={styles.text_step}>STEP TWO</Text>
           <Text
             style={[styles.text, styles.text_left]}
-          >Open an account with your local credit union.</Text>
+          >
+Open an account with your local credit union.
+          </Text>
           <Text style={[styles.text_minor, { marginTop: 20 }]}>Transfer your money.</Text>
           <Text style={styles.text_minor}>Set up payments.</Text>
           <Text style={styles.text_minor}>Close your old account.</Text>

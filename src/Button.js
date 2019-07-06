@@ -1,7 +1,9 @@
 // @flow
 
 import React, { PropTypes } from 'react';
-import { ColorPropType, StyleSheet, Text, TouchableHighlight, View } from 'react-native'; // ImageSourcePropType,
+import {
+  ColorPropType, StyleSheet, Text, TouchableHighlight, View,
+} from 'react-native'; // ImageSourcePropType,
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import stylePropType from 'react-style-proptype';

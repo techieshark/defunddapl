@@ -48,7 +48,8 @@ function BankCheckScene(props: Props) {
             marginTop: px(constants.SPACING_MEDIUM), /* marginTop: px(40) */
           },
         ]}
-      >Is your bank funding the pipeline?
+      >
+Is your bank funding the pipeline?
       </Text>
     </View>
   );

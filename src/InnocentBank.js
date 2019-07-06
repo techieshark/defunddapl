@@ -15,8 +15,8 @@ type Props = {
 function InnocentBank(props: Props) {
   const shareOptions = {
     title: "React Native",
-    message: 'Nice! #DeFundDaplApp says my bank *is not* funding the ' +
-      'Dakota Access Pipeline. Is yours? #NoDAPL',
+    message: 'Nice! #DeFundDaplApp says my bank *is not* funding the '
+      + 'Dakota Access Pipeline. Is yours? #NoDAPL',
     url: "http://www.defunddapl.org",
     social: 'twitter',
   };
@@ -34,7 +34,9 @@ function InnocentBank(props: Props) {
         >
           Phew!
         </Text>
-        <Text style={styles.text}>As far as we know, { props.bankName }
+        <Text style={styles.text}>
+As far as we know,
+          { props.bankName }
           <Text style={[styles.text, styles.text_italic]}> is not funding </Text>
           the Dakota Access Pipeline.
         </Text>

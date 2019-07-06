@@ -29,7 +29,9 @@ function Amount(props: Props) {
         styles.text_impact, localStyles.textStyle,
         props.textStyle && props.textStyle,
       ]}
-    >{ props.amount }</Text>
+    >
+      { props.amount }
+    </Text>
   );
 }
 

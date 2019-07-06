@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { Alert, Linking, Navigator, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert, Linking, Navigator, StyleSheet, Text, View,
+} from 'react-native';
 
 import Button from './Button';
 import Container from './Container';
@@ -29,7 +31,9 @@ function Step5Scene(props: Props) {
         <Text style={styles.text_step}>STEP FIVE</Text>
         <Text
           style={[styles.text, styles.text_left, { fontSize: 26 }]}
-        >Help the #DefundDAPL campaign near you.</Text>
+        >
+Help the #DefundDAPL campaign near you.
+        </Text>
       </View>
       <View>
         <Text
@@ -39,7 +43,9 @@ function Step5Scene(props: Props) {
             textAlign: 'center',
             marginBottom: px(10),
           }}
-        >Help the movement near you</Text>
+        >
+Help the movement near you
+        </Text>
         <Button
           title="FIND AN ACTION"
           accessibilityLabel="Find an action"

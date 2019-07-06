@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { Navigator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Navigator, ScrollView, StyleSheet, Text, View,
+} from 'react-native';
 
 import constants from './constants';
 import screens from './screens';
@@ -39,11 +41,18 @@ function GuiltyBank(props: Props) {
             styles.text, styles.text_size_l,
             { fontSize: px(30), textAlign: 'left' },
           ]}
-        >{ props.bank.name } is funding the Dakota Access Pipeline with </Text>
+        >
+          { props.bank.name }
+          {' '}
+is funding the Dakota Access Pipeline with
+        </Text>
         <Amount amount={props.bank.amount} textStyle={localStyles.amountText} />
         <Text
           style={[styles.text, { fontSize: px(22), textAlign: 'left' }]}
-        >belonging to you and other customers. </Text>
+        >
+belonging to you and other customers.
+          {' '}
+        </Text>
       </ScrollView>
       <Button
         color="white"

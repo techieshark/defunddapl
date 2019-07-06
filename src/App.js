@@ -5,7 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Navigator, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import {
+ Navigator, StyleSheet, Text, TouchableHighlight, View 
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import codePush from 'react-native-code-push';
@@ -55,8 +57,8 @@ const appStyles = StyleSheet.create({
 class App extends Component {
 /* eslint-enable react/prefer-stateless-function */
 
-// function App() {
-//   return (
+  // function App() {
+  //   return (
   render() {
     return (
       <Navigator
@@ -178,8 +180,9 @@ class App extends Component {
                 <View style={styles.container}>
                   <Text
                     style={[styles.text, styles.text_size_s]}
-                  >How did we get here?? Unhandled Navigation case.
-                  </Text>
+                  >
+How did we get here?? Unhandled Navigation case.
+</Text>
                 </View>
               );
           }
@@ -201,4 +204,3 @@ class App extends Component {
 App = codePush(App); // eslint-disable-line no-class-assign
 
 export default App;
-

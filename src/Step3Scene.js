@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { Alert, Linking, Navigator, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert, Linking, Navigator, StyleSheet, Text, View,
+} from 'react-native';
 
 import Button from './Button';
 import Container from './Container';
@@ -79,4 +81,3 @@ function Step3Scene(props: Props) {
 }
 
 export default Step3Scene;
-

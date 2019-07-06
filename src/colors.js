@@ -48,4 +48,3 @@ export default colors;
 // see also:
 // https://github.com/react-native-community/react-native-elements/
 // blob/master/src/config/colors.js
-

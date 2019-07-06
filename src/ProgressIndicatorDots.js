@@ -30,7 +30,7 @@ const localStyles = StyleSheet.create({
   },
   dot: {
     fontSize: px(26),
-    lineHeight: px(HEIGHT), /* match dot_active*/
+    lineHeight: px(HEIGHT), /* match dot_active */
     fontFamily: 'Futura-Bold',
     textAlign: 'center',
   },
@@ -67,7 +67,9 @@ function ProgressIndicatorDots(props: Props) {
               localStyles.dot,
               i === (props.current - 1) && localStyles.dot_active,
             ]}
-          >·</Text>
+          >
+·
+          </Text>
         </View>
       ))}
     </View>
@@ -80,4 +82,3 @@ ProgressIndicatorDots.defaultProps = {
 
 export default ProgressIndicatorDots;
 export { HEIGHT as height };
-

@@ -1,7 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Alert, Modal, Navigator, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert, Modal, Navigator, StyleSheet, Text, View,
+} from 'react-native';
 
 import Communications from 'react-native-communications';
 
@@ -66,13 +68,16 @@ function renderNumberMissing() {
     <Text
       style={[
         styles.text,
-        { fontSize: px(22), marginHorizontal: px(30), textAlign: 'center', marginBottom: px(30) }]}
-    >Sorry, we don&#39;t have a phone number yet.</Text>
+        {
+          fontSize: px(22), marginHorizontal: px(30), textAlign: 'center', marginBottom: px(30),
+        }]}
+    >
+Sorry, we don&#39;t have a phone number yet.
+    </Text>
   );
 }
 
 class Step1Scene extends Component {
-
   props: Props;
 
   state: {
@@ -89,35 +94,35 @@ class Step1Scene extends Component {
       textSoFar: undefined,
     };
 
-      // example bank:
-      //   {
-      //   name: 'Wells Fargo',
-      //   funding: true,
-      //   amount: '$467,000,000',
-      //   emailAddressee: 'CEO Sloan',
-      //   emailTo: 'CEO Timothy J. Sloan <timothy.j.sloan@wellsfargo.com>',
-      //   emailCC: 'BoardCommunications@wellsfargo.com',
-      //   },
+    // example bank:
+    //   {
+    //   name: 'Wells Fargo',
+    //   funding: true,
+    //   amount: '$467,000,000',
+    //   emailAddressee: 'CEO Sloan',
+    //   emailTo: 'CEO Timothy J. Sloan <timothy.j.sloan@wellsfargo.com>',
+    //   emailCC: 'BoardCommunications@wellsfargo.com',
+    //   },
 
-      // TODO: handle case where emailAddressee is null (we have no one we can email)
+    // TODO: handle case where emailAddressee is null (we have no one we can email)
   }
 
   getMsgBody() {
-    const bank = this.props.bank;
+    const { bank } = this.props;
 
     const anonymousUser = 'Your former customer';
     const msgBody = `Dear ${bank.emailAddressee}:
 
-      I am alarmed to learn that ${bank.name} has provided ${bank.amount} ` +
-      `in funding to the Dakota Access Pipeline.
+      I am alarmed to learn that ${bank.name} has provided ${bank.amount} `
+      + `in funding to the Dakota Access Pipeline.
 
-      That is money that belongs to me and other customers, and I don't support it funding a ` +
-      `fossil fuel project which threatens the health and safety of the Lakota people ` +
-      `of the Sioux nation, millions of people along the Missouri, as well as ` +
-      `the stability of the climate itself.
+      That is money that belongs to me and other customers, and I don't support it funding a `
+      + `fossil fuel project which threatens the health and safety of the Lakota people `
+      + `of the Sioux nation, millions of people along the Missouri, as well as `
+      + `the stability of the climate itself.
 
-      Due to your bank's financial support of the Dakota Access Pipeline, ` +
-      `I will no longer be banking with ${bank.name}.
+      Due to your bank's financial support of the Dakota Access Pipeline, `
+      + `I will no longer be banking with ${bank.name}.
 
       Sincerely,
       ${this.state.name || anonymousUser}`;
@@ -135,7 +140,8 @@ class Step1Scene extends Component {
         this.props.bank.emailCC,
         null /* bcc */,
         'Divesting from the Dakota Pipeline', /* subject */
-        this.getMsgBody());
+        this.getMsgBody(),
+      );
     }, 300);
   }
 
@@ -171,13 +177,13 @@ class Step1Scene extends Component {
   }
 
   render() {
-    const showCallInfo : boolean = !this.props.bank.emailTo;
-    const showEmailBtn : boolean = this.props.bank.emailTo != null;
+    const showCallInfo: boolean = !this.props.bank.emailTo;
+    const showEmailBtn: boolean = this.props.bank.emailTo != null;
 
     return (
       <Container style={[styles.stepSpaceAbove]}>
         <Modal
-          animationType={"slide"}
+          animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => { Alert.alert("Modal has been closed."); }}
@@ -191,7 +197,8 @@ class Step1Scene extends Component {
                 <Text style={[styles.text, { textAlign: 'left' }]}>Email signature</Text>
                 <Text
                   style={[styles.text_minor, { marginBottom: px(36) }]}
-                >Please enter your name to attach it to an email template we prepared earlier.
+                >
+Please enter your name to attach it to an email template we prepared earlier.
                 </Text>
                 <TextInput
                   // style={styles.textinput}
@@ -231,7 +238,11 @@ class Step1Scene extends Component {
         <View>
           <View>
             <Text style={styles.text_step}>STEP ONE</Text>
-            <Text style={[styles.text, { textAlign: 'left' }]}>Let {this.props.bank.name} know your funds
+            <Text style={[styles.text, { textAlign: 'left' }]}>
+Let
+              {this.props.bank.name}
+              {' '}
+know your funds
             should not be used to fund
             the Dakota oil pipeline.
             </Text>

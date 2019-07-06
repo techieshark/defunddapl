@@ -33,10 +33,10 @@ const photos = [
 // TODO: add to assets? https://stackoverflow.com/questions/29290460/use-image-with-a-local-file
 /* eslint-disable global-require */
 
-  // {
-  //   src: 'images/pic1',
-  //   // note: intentionally drop file extension
-  //   // http://stackoverflow.com/a/36677492/1024811
-  // },
+// {
+//   src: 'images/pic1',
+//   // note: intentionally drop file extension
+//   // http://stackoverflow.com/a/36677492/1024811
+// },
 
 export default photos;

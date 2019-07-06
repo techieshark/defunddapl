@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { Alert, Linking, Navigator, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert, Linking, Navigator, StyleSheet, Text, View,
+} from 'react-native';
 
 import Button from './Button';
 import Container from './Container';
@@ -34,7 +36,9 @@ function Step4Scene(props: Props) {
         <Text style={styles.text_step}>STEP FOUR</Text>
         <Text
           style={[styles.text, styles.text_left, { fontSize: 26 }]}
-        >Post about #DefundDAPL</Text>
+        >
+Post about #DefundDAPL
+        </Text>
         <Text style={[styles.text_minor]}>Find inspiration below</Text>
       </View>
       <Gallery />
@@ -80,4 +84,3 @@ function Step4Scene(props: Props) {
 
 
 export default Step4Scene;
-

@@ -1,6 +1,8 @@
 
 import React from 'react';
-import { Dimensions, Image, ScrollView, StyleSheet } from 'react-native';
+import {
+  Dimensions, Image, ScrollView, StyleSheet,
+} from 'react-native';
 
 import photos from './photos';
 

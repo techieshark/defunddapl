@@ -1,5 +1,1 @@
-// const XMLHttpRequest = require('xmlhttprequest');
-
-import { XMLHttpRequest } from 'xmlhttprequest';
-
-// global.XMLHttpRequest = XMLHttpRequest;
+import 'isomorphic-fetch'; // https://stackoverflow.com/a/42915092/1024811

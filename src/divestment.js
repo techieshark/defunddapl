@@ -1,4 +1,5 @@
 // @flow
+/* global fetch */
 
 // import { XMLHttpRequest } from 'xmlhttprequest';
 // ^^ shouldn't need, XMLHttpRequest is baked into react native (as is Fetch)
@@ -18,25 +19,22 @@ const column = 1;
  * Fetch total of reported personal divestments.
  */
 function getDivestmentTotal(callback: (string) => any) {
-  // TODO: error handling
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-  xhr.send(null);
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === xhr.DONE && xhr.status === 200 /* OK */) {
-      const response = JSON.parse(xhr.responseText);
-      // console.log('Requesting divestment, fetched response: ', response);
-      const dollarText = response.values[row][column];
-      console.log(`row ${row}:`, response.values[row]);
+  fetch(url)
+    .then(response => response.json())
+    .then((sheet) => {
+      // console.log('fetched sheet: ', sheet);
+      if (sheet.error) {
+        // console.log('Error accessing sheet: ', sheet.error);
+        throw new Error(`Could not access Google Sheet: ${sheet.error.message}`);
+      }
+
+      const dollarText = sheet.values[row][column];
+      console.log(`row ${row}:`, sheet.values[row]);
       callback(dollarText);
-    // } else if (xhr.readyState === xhr.HEADERS_RECEIVED) {
-    //   console.log('Requesting divestment: headers received.');
-    // } else if (xhr.readyState === xhr.LOADING) {
-    //   console.log('Requesting divestment: loading...');
-    } else if (xhr.readyState !== xhr.HEADERS_RECEIVED && xhr.readyState !== xhr.LOADING) {
-      console.error(`Something went wrong fetching divestment (status ${xhr.status})`, xhr);
-    }
-  };
+    })
+    .catch((error) => {
+      console.error('Error fetching divestment total: ', error);
+    });
 }
 
 export default getDivestmentTotal;
